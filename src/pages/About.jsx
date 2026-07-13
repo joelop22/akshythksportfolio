@@ -65,7 +65,7 @@ export default function About() {
           </div>
 
           <div className="pt-6">
-            
+<a            
               href="#resume"
               onClick={(e) => { 
                 e.preventDefault(); 
