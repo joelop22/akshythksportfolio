@@ -19,7 +19,7 @@ export default function Footer() {
         
         <div className="flex items-center space-x-5 sm:space-x-6">
           <a 
-            href="https://instagram.com" 
+            href="https://www.instagram.com/akshythks/" 
             target="_blank" 
             rel="noopener noreferrer"
             className="text-[9px] sm:text-[10px] tracking-widest uppercase text-neutral-400 hover:text-neutral-900 transition-colors duration-300 font-light"
@@ -27,12 +27,12 @@ export default function Footer() {
             Instagram
           </a>
           <a 
-            href="https://linkedin.com" 
+           href="https://wa.me/919946865923"
             target="_blank" 
             rel="noopener noreferrer"
             className="text-[9px] sm:text-[10px] tracking-widest uppercase text-neutral-400 hover:text-neutral-900 transition-colors duration-300 font-light"
           >
-            LinkedIn
+            Whatsapp
           </a>
           <a 
             href="https://www.behance.net/akshythakshyth" 
