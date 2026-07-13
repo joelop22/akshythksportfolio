@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import ImageWrapper from './ImageWrapper';
 
@@ -10,6 +10,11 @@ export default function Lightbox({
   onNext 
 }) {
   const activeImage = images[currentIndex];
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    setVisible(true);
+  }, []);
 
   useEffect(() => {
     if (!activeImage) return;
@@ -38,8 +43,10 @@ export default function Lightbox({
   };
 
   return (
-    <div 
-      className="fixed inset-0 z-50 flex flex-col justify-between bg-neutral-50/98 backdrop-blur-md transition-opacity duration-300 ease-out"
+    <div
+      className={`fixed inset-0 z-50 flex flex-col justify-between bg-neutral-50/98 backdrop-blur-md transition-opacity duration-300 ease-out ${
+        visible ? 'opacity-100' : 'opacity-0'
+      }`}
       onClick={handleBackdropClick}
     >
       {/* Top Bar (Close and Navigation Counts) */}
@@ -70,10 +77,11 @@ export default function Lightbox({
 
         {/* Center Image Wrapper */}
         <div className="w-full h-full max-h-[70vh] flex items-center justify-center relative p-4">
-          <ImageWrapper
+         <ImageWrapper
+            key={activeImage.imageUrl}
             src={activeImage.imageUrl}
             alt={activeImage.title}
-            className="max-w-full max-h-full object-contain"
+            className="max-w-full max-h-full object-contain lightbox-image-enter"
             imgClassName="max-w-full max-h-[70vh] object-contain mx-auto"
           />
         </div>
