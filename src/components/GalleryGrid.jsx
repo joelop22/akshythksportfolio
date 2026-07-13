@@ -13,7 +13,7 @@ export default function GalleryGrid({ images, onImageClick }) {
   }
 
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6 select-none">
+    <div className="columns-2 sm:columns-2 md:columns-3 lg:columns-4 gap-3 sm:gap-6 select-none">
           {images.map((image, index) => (
         <GalleryItem
           key={image.id || index}

@@ -16,7 +16,7 @@ export default function GalleryItem({ image, index, onClick }) {
     <div
       ref={ref}
       onClick={onClick}
-      className={`group cursor-zoom-in block relative overflow-hidden bg-neutral-100 border border-neutral-100 transition-all duration-700 ease-out ${
+      className={`group cursor-zoom-in block relative overflow-hidden bg-neutral-100 border border-neutral-100 transition-all duration-700 ease-out mb-3 sm:mb-6 break-inside-avoid w-full ${
         isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
       }`}
       style={{ transitionDelay: `${(index % 4) * 100}ms` }}
