@@ -64,18 +64,7 @@ export default function About() {
             </div>
           </div>
 
-          <div className="pt-6">
-<a            
-              href="#resume"
-              onClick={(e) => { 
-                e.preventDefault(); 
-                alert("Curriculum Vitae download triggered."); 
-              }}
-              className="inline-block text-[10px] font-bold tracking-[0.2em] uppercase text-white bg-neutral-950 hover:bg-accent hover:border-accent transition-colors duration-300 px-6 py-3.5 border border-neutral-950"
-            >
-              Download CV / Resume
-            </a>
-          </div>
+        
         </div>
       </div>
     </>
