@@ -20,7 +20,7 @@ export default function About() {
         {/* Headshot Column */}
         <div className="aspect-[4/5] max-w-xs sm:max-w-none mx-auto md:mx-0 w-full overflow-hidden bg-neutral-100 border border-neutral-200/50">
           <ImageWrapper
-            src="https://pps.services.adobe.com/api/profile/6F5C2712633D719F0A495CDF@AdobeID/image/ff80f68d-3b3e-4db8-9933-e5572ed2c54d/276"
+            src="DSCF4166-100.JPG.jpeg"
             alt="Akshythks ks portrait"
             className="w-full h-full"
             imgClassName="object-cover"
