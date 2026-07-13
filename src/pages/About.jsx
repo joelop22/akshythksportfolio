@@ -19,12 +19,12 @@ export default function About() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-start animate-fade-in">
         {/* Headshot Column */}
         <div className="aspect-[4/5] max-w-xs sm:max-w-none mx-auto md:mx-0 w-full overflow-hidden bg-neutral-100 border border-neutral-200/50">
-b583e07 (Update About page and profile image)
-  src="/profile.jpg"
-  alt="Akshythks ks portrait"
-  className="w-full h-full"
-  imgClassName="object-cover"
-/>
+          <ImageWrapper
+            src="/profile.jpg"
+            alt="Akshythks ks portrait"
+            className="w-full h-full"
+            imgClassName="object-cover"
+          />
         </div>
 
         {/* Content Column */}
@@ -69,7 +69,7 @@ b583e07 (Update About page and profile image)
 
           {/* CV Download Link */}
           <div className="pt-6">
-            <a
+            
               href="#resume"
               onClick={(e) => { 
                 e.preventDefault(); 
