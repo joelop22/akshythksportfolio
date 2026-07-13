@@ -115,7 +115,7 @@ export default function Gallery() {
             <span>/</span>
             <span className="text-neutral-500 font-normal">{categoryName}</span>
           </div>
-          <h1 className="text-2xl md:text-3xl font-light tracking-tight text-neutral-900 pt-2">
+          <h1 className="text-2xl md:text-3xl font-light tracking-tight text-neutral-900 pt-2 font-display">
             {categoryName}
           </h1>
           {description && (

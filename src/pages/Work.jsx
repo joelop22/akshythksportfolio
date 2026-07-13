@@ -47,7 +47,7 @@ export default function Work() {
 
       <div className="space-y-8 sm:space-y-12 animate-fade-in">
         <div className="border-b border-neutral-200 pb-5 sm:pb-6">
-          <h1 className="text-2xl md:text-3xl font-light tracking-tight text-neutral-900">
+          <h1 className="text-2xl md:text-3xl font-light tracking-tight text-neutral-900 font-display">
             Galleries
           </h1>
           <p className="text-[10px] sm:text-xs text-neutral-400 mt-2 font-light tracking-widest uppercase">

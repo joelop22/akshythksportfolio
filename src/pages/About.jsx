@@ -28,7 +28,7 @@ export default function About() {
 
         <div className="space-y-8 select-none">
           <div className="border-b border-neutral-200 pb-4">
-            <h1 className="text-2xl md:text-3xl font-light tracking-tight text-neutral-900">
+            <h1 className="text-2xl md:text-3xl font-light tracking-tight text-neutral-900 font-display">
               Akshyth ks
             </h1>
             <p className="text-xs text-neutral-400 mt-2 font-light tracking-widest uppercase">
