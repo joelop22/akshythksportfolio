@@ -26,7 +26,7 @@ export default function ContactSection() {
           </Link>
           <div className="flex items-center gap-5 pt-2">
             <a
-              href="https://instagram.com"
+              href="https://www.instagram.com/akshythks/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-[10px] tracking-widest uppercase text-neutral-400 hover:text-neutral-900 transition-colors duration-300 font-light"
