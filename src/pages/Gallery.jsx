@@ -131,19 +131,7 @@ export default function Gallery() {
           onImageClick={(index) => setLightboxIndex(index)}
         />
 
-        {/* Behance CTA */}
-        {behanceUrl && (
-          <div className="pt-2 pb-6 text-center sm:text-left">
-            <a
-              href={behanceUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block text-[10px] font-bold tracking-[0.2em] uppercase text-neutral-700 border border-neutral-300 hover:border-accent hover:text-accent transition-colors duration-300 px-6 py-3.5"
-            >
-              View Full Project on Behance &rarr;
-            </a>
-          </div>
-        )}
+    
 
         {/* Lightbox Modal */}
         {lightboxIndex !== null && (
