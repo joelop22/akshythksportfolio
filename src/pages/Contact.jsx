@@ -3,15 +3,18 @@ import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../lib/firebase';
 import SEO from '../components/SEO';
 
+const WHATSAPP_NUMBER = '919946865923';
+
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    mobile: '',
     subject: '',
     message: ''
   });
   
-  const [status, setStatus] = useState('IDLE'); // IDLE, SENDING, SUCCESS, ERROR
+  const [status, setStatus] = useState('IDLE');
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleChange = (e) => {
@@ -24,7 +27,7 @@ export default function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.name || !formData.email || !formData.message) {
+    if (!formData.name || !formData.email || !formData.mobile || !formData.message) {
       setStatus('ERROR');
       setErrorMessage('Please fill out all required fields.');
       return;
@@ -43,7 +46,18 @@ export default function Contact() {
         createdAt: serverTimestamp()
       });
       setStatus('SUCCESS');
-      setFormData({ name: '', email: '', subject: '', message: '' });
+
+      const whatsappText = [
+        `Name: ${formData.name}`,
+        formData.subject ? `Subject: ${formData.subject}` : null,
+        `Message: ${formData.message}`
+      ].filter(Boolean).join('\n');
+
+      const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappText)}`;
+
+      setFormData({ name: '', email: '', mobile: '', subject: '', message: '' });
+
+      window.location.href = whatsappUrl;
     } catch (error) {
       console.error("Error sending message to Firestore:", error);
       setStatus('ERROR');
@@ -56,7 +70,6 @@ export default function Contact() {
       <SEO title="Contact" description="Get in touch with Akshythks ks for bookings, exhibitions, or licensing inquiries." />
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 sm:gap-12 md:gap-20 items-start animate-fade-in">
-        {/* Info Column */}
         <div className="space-y-8 select-none">
           <div className="border-b border-neutral-200 pb-4">
             <h1 className="text-2xl md:text-3xl font-light tracking-tight text-neutral-900">
@@ -89,7 +102,6 @@ export default function Contact() {
           </div>
         </div>
 
-        {/* Form Column */}
         <div className="bg-white border border-neutral-200/60 p-6 sm:p-10">
           <h2 className="text-[10px] font-bold tracking-[0.25em] text-neutral-400 uppercase mb-8 pb-2 border-b border-neutral-100">
             Send a Message
@@ -104,7 +116,7 @@ export default function Contact() {
                 Message Sent
               </h3>
               <p className="text-xs text-neutral-500 font-light max-w-xs mx-auto leading-relaxed">
-                Thank you for your message. I review all inquiries and will reply within 48 hours.
+                Thank you for your message. Redirecting you to WhatsApp...
               </p>
               <button 
                 onClick={() => setStatus('IDLE')}
@@ -121,7 +133,6 @@ export default function Contact() {
                 </div>
               )}
 
-              {/* Name Field */}
               <div className="space-y-1">
                 <label htmlFor="name" className="text-[9px] font-bold tracking-widest uppercase text-neutral-400">
                   Name <span className="text-accent">*</span>
@@ -139,7 +150,6 @@ export default function Contact() {
                 />
               </div>
 
-              {/* Email Field */}
               <div className="space-y-1">
                 <label htmlFor="email" className="text-[9px] font-bold tracking-widest uppercase text-neutral-400">
                   Email Address <span className="text-accent">*</span>
@@ -157,7 +167,23 @@ export default function Contact() {
                 />
               </div>
 
-              {/* Subject Field */}
+              <div className="space-y-1">
+                <label htmlFor="mobile" className="text-[9px] font-bold tracking-widest uppercase text-neutral-400">
+                  Mobile Number <span className="text-accent">*</span>
+                </label>
+                <input
+                  type="tel"
+                  id="mobile"
+                  name="mobile"
+                  required
+                  disabled={status === 'SENDING'}
+                  value={formData.mobile}
+                  onChange={handleChange}
+                  className="w-full bg-transparent border-b border-neutral-200 focus:border-accent text-sm font-light text-neutral-800 outline-none py-2.5 transition-colors duration-300"
+                  placeholder="+91 XXXXX XXXXX"
+                />
+              </div>
+
               <div className="space-y-1">
                 <label htmlFor="subject" className="text-[9px] font-bold tracking-widest uppercase text-neutral-400">
                   Subject
@@ -174,7 +200,6 @@ export default function Contact() {
                 />
               </div>
 
-              {/* Message Field */}
               <div className="space-y-1">
                 <label htmlFor="message" className="text-[9px] font-bold tracking-widest uppercase text-neutral-400">
                   Message <span className="text-accent">*</span>
