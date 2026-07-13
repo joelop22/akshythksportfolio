@@ -90,13 +90,10 @@ export default function Contact() {
             <span className="font-semibold text-neutral-800 uppercase tracking-widest text-[10px] block mb-2">Socials</span>
             <div className="flex flex-col space-y-2 text-xs font-light text-neutral-500">
               <a href="https://www.behance.net/akshythakshyth" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors w-max">
-                Behance &mdash; akshythakshyth
+                Behance
               </a>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors w-max">
+              <a href="https://www.instagram.com/akshythks?utm_source=qr&igsh=eWo5dDZpNWNtbXJ2" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors w-max">
                 Instagram
-              </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors w-max">
-                LinkedIn
               </a>
             </div>
           </div>
