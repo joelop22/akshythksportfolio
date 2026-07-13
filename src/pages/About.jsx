@@ -17,7 +17,6 @@ export default function About() {
       <SEO title="About" description="Biography and skills of photographer and visual director Akshythks ks." />
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-start animate-fade-in">
-        {/* Headshot Column */}
         <div className="aspect-[4/5] max-w-xs sm:max-w-none mx-auto md:mx-0 w-full overflow-hidden bg-neutral-100 border border-neutral-200/50">
           <ImageWrapper
             src="/profile.jpg"
@@ -27,7 +26,6 @@ export default function About() {
           />
         </div>
 
-        {/* Content Column */}
         <div className="space-y-8 select-none">
           <div className="border-b border-neutral-200 pb-4">
             <h1 className="text-2xl md:text-3xl font-light tracking-tight text-neutral-900">
