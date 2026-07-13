@@ -6,6 +6,7 @@ import CategoryTile from '../components/CategoryTile';
 import LoadingSpinner from '../components/LoadingSpinner';
 import ContactSection from '../components/ContactSection';
 import { GALLERIES } from '../data/galleries';
+import RevealOnScroll from '../components/RevealOnScroll';
 
 export default function Home() {
   const [categories, setCategories] = useState(GALLERIES);
@@ -71,12 +72,12 @@ export default function Home() {
 
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-8 sm:gap-x-8 sm:gap-y-10 md:gap-12">
             {categories.map((category, index) => (
-              <div key={category.id} className="relative group">
+              <RevealOnScroll key={category.id} index={index} className="relative group">
                 <div className="hidden sm:block absolute top-0 left-0 -translate-y-6 text-[10px] font-medium tracking-widest text-neutral-300 font-mono">
                   0{index + 1} &mdash;
                 </div>
                 <CategoryTile category={category} />
-              </div>
+              </RevealOnScroll>
             ))}
           </div>
         </div>
