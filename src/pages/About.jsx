@@ -50,7 +50,6 @@ export default function About() {
             </p>
           </div>
 
-          {/* Skills Section */}
           <div className="space-y-4 pt-4">
             <h3 className="text-xs font-bold tracking-[0.2em] text-neutral-400 uppercase">
               Areas of Focus
@@ -67,13 +66,12 @@ export default function About() {
             </div>
           </div>
 
-          {/* CV Download Link */}
           <div className="pt-6">
             
               href="#resume"
               onClick={(e) => { 
                 e.preventDefault(); 
-                alert("Curriculum Vitae download triggered. (In your actual codebase, link this button directly to your static PDF file URL)."); 
+                alert("Curriculum Vitae download triggered."); 
               }}
               className="inline-block text-[10px] font-bold tracking-[0.2em] uppercase text-white bg-neutral-950 hover:bg-accent hover:border-accent transition-colors duration-300 px-6 py-3.5 border border-neutral-950"
             >
