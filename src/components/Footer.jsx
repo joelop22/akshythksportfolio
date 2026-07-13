@@ -7,13 +7,15 @@ export default function Footer() {
   return (
     <footer className="border-t border-neutral-200/50 bg-white select-none">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-8 flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4">
-        {/* Admin panel is accessed only by clicking the copyright line below — no visible "Admin" label */}
-        <Link 
-          to="/admin" 
-          className="text-[9px] sm:text-[10px] tracking-widest uppercase text-neutral-400 hover:text-accent transition-colors duration-300 font-light"
-        >
-          &copy; {currentYear} Akshythks ks. All rights reserved.
-        </Link>
+        <p className="text-[9px] sm:text-[10px] tracking-widest uppercase text-neutral-400 font-light">
+          <Link 
+            to="/admin" 
+            className="hover:text-accent transition-colors duration-300"
+          >
+            &copy;
+          </Link>
+          {' '}{currentYear} Akshythks ks. All rights reserved.
+        </p>
         
         <div className="flex items-center space-x-5 sm:space-x-6">
           <a 
