@@ -45,7 +45,7 @@ export default function ImageWrapper({
 
   return (
     <div 
-      className={`relative overflow-hidden select-none ${className}`}
+      className={`relative overflow-hidden select-none group ${className}`}
       onContextMenu={handleContextMenu}
     >
       <img
@@ -54,7 +54,7 @@ export default function ImageWrapper({
         loading={loading}
         draggable={false}
         onError={() => setFailed(true)}
-        className={`image-protect w-full h-full object-cover ${imgClassName}`}
+       className={`image-protect w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110 ${imgClassName}`}
         {...props}
       />
       {/* 
