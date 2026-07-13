@@ -14,14 +14,46 @@ import {
   orderBy, 
   where 
 } from 'firebase/firestore';
-import { 
-  ref, 
-  uploadBytesResumable, 
-  getDownloadURL 
-} from 'firebase/storage';
-import { auth, db, storage } from '../lib/firebase';
+import { auth, db } from '../lib/firebase';
 import SEO from '../components/SEO';
 import LoadingSpinner from '../components/LoadingSpinner';
+// Converts an image file to a compressed base64 data URL, resizing it so the
+// resulting string comfortably fits inside Firestore's 1MB document limit.
+// No Firebase Storage is used -- the image itself is stored directly in Firestore.
+const fileToCompressedBase64 = (file, maxDimension = 1600, targetBytes = 700000) => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const img = new Image();
+      img.onload = () => {
+        let width = img.width;
+        let height = img.height;
+        if (width > maxDimension || height > maxDimension) {
+          const ratio = Math.min(maxDimension / width, maxDimension / height);
+          width = Math.round(width * ratio);
+          height = Math.round(height * ratio);
+        }
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, width, height);
+
+        let quality = 0.85;
+        let dataUrl = canvas.toDataURL('image/jpeg', quality);
+        while (dataUrl.length > targetBytes && quality > 0.3) {
+          quality -= 0.1;
+          dataUrl = canvas.toDataURL('image/jpeg', quality);
+        }
+        resolve(dataUrl);
+      };
+      img.onerror = () => reject(new Error('Could not read image file.'));
+      img.src = event.target.result;
+    };
+    reader.onerror = () => reject(new Error('Could not read file.'));
+    reader.readAsDataURL(file);
+  });
+};
 
 export default function Admin() {
   const [user, setUser] = useState(null);
@@ -193,50 +225,33 @@ export default function Admin() {
       return;
     }
 
-    setCatUploading(true);
+  setCatUploading(true);
+    setCatUploadProgress(0);
     try {
-      // 1. Upload cover to Firebase Storage
-      const storagePath = `covers/${Date.now()}_${newCatFile.name}`;
-      const storageRef = ref(storage, storagePath);
-      const uploadTask = uploadBytesResumable(storageRef, newCatFile);
+      const base64Image = await fileToCompressedBase64(newCatFile);
+      setCatUploadProgress(70);
 
-      uploadTask.on('state_changed', 
-        (snapshot) => {
-          const pct = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-          setCatUploadProgress(pct);
-        }, 
-        (error) => {
-          console.error(error);
-          setCatError('Failed uploading file to storage.');
-          setCatUploading(false);
-        }, 
-        async () => {
-          const downloadUrl = await getDownloadURL(uploadTask.snapshot.ref);
-          
-          // 2. Add document to Firestore
-          await addDoc(collection(db, 'categories'), {
-            name: newCatName,
-            slug: newCatSlug,
-            order: parseInt(newCatOrder, 10) || 0,
-            coverImageUrl: downloadUrl
-          });
+      await addDoc(collection(db, 'categories'), {
+        name: newCatName,
+        slug: newCatSlug,
+        order: parseInt(newCatOrder, 10) || 0,
+        coverImageUrl: base64Image
+      });
+      setCatUploadProgress(100);
 
-          // Reset fields
-          setNewCatName('');
-          setNewCatSlug('');
-          setNewCatOrder('0');
-          setNewCatFile(null);
-          setCatUploadProgress(0);
-          setCatUploading(false);
-          
-          // Refresh list
-          fetchCategories();
-        }
-      );
+      setNewCatName('');
+      setNewCatSlug('');
+      setNewCatOrder('0');
+      setNewCatFile(null);
+      setCatUploadProgress(0);
+      setCatUploading(false);
+
+      fetchCategories();
     } catch (err) {
       console.error(err);
-      setCatError('Error saving category.');
+      setCatError(err.message || 'Error saving category.');
       setCatUploading(false);
+      setCatUploadProgress(0);
     }
   };
 
@@ -262,57 +277,39 @@ export default function Admin() {
       return;
     }
 
-    setImageUploading(true);
+   setImageUploading(true);
+    setImageUploadProgress(0);
     try {
-      // 1. Upload gallery image to Firebase Storage
-      const storagePath = `galleries/${uploadCategory}/${Date.now()}_${uploadFile.name}`;
-      const storageRef = ref(storage, storagePath);
-      const uploadTask = uploadBytesResumable(storageRef, uploadFile);
+      const base64Image = await fileToCompressedBase64(uploadFile);
+      setImageUploadProgress(70);
 
-      uploadTask.on('state_changed', 
-        (snapshot) => {
-          const pct = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-          setImageUploadProgress(pct);
-        }, 
-        (error) => {
-          console.error(error);
-          setImageError('Failed uploading image to storage.');
-          setImageUploading(false);
-        }, 
-        async () => {
-          const downloadUrl = await getDownloadURL(uploadTask.snapshot.ref);
+      await addDoc(collection(db, 'images'), {
+        categorySlug: uploadCategory,
+        imageUrl: base64Image,
+        title: uploadTitle,
+        year: uploadYear,
+        note: uploadNote,
+        order: parseInt(uploadOrder, 10) || 0
+      });
+      setImageUploadProgress(100);
 
-          // 2. Add document to images collection in Firestore
-          await addDoc(collection(db, 'images'), {
-            categorySlug: uploadCategory,
-            imageUrl: downloadUrl,
-            title: uploadTitle,
-            year: uploadYear,
-            note: uploadNote,
-            order: parseInt(uploadOrder, 10) || 0
-          });
+      setUploadTitle('');
+      setUploadYear('');
+      setUploadNote('');
+      setUploadOrder('0');
+      setUploadFile(null);
+      setImageUploadProgress(0);
+      setImageUploading(false);
+      setImageSuccess(true);
 
-          // Reset
-          setUploadTitle('');
-          setUploadYear('');
-          setUploadNote('');
-          setUploadOrder('0');
-          setUploadFile(null);
-          setImageUploadProgress(0);
-          setImageUploading(false);
-          setImageSuccess(true);
-          
-          // Clear success flash
-          setTimeout(() => setImageSuccess(false), 5000);
-        }
-      );
+      setTimeout(() => setImageSuccess(false), 5000);
     } catch (err) {
       console.error(err);
-      setImageError('Error creating database record.');
+      setImageError(err.message || 'Error creating database record.');
       setImageUploading(false);
+      setImageUploadProgress(0);
     }
   };
-
   const handleDeleteImage = async (imageId) => {
     if (!window.confirm('Delete this image from this gallery?')) {
       return;
@@ -342,7 +339,7 @@ export default function Admin() {
   }
 
   // --- BACKEND NOT CONFIGURED ---
-  if (!db || !auth || !storage) {
+  if (!db || !auth) {
     return (
       <>
         <SEO title="Studio Admin" description="Sign in to manage the studio's galleries." />
