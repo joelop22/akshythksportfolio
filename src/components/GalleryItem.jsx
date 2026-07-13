@@ -2,6 +2,13 @@ import React from 'react';
 import ImageWrapper from './ImageWrapper';
 import useInView from '../hooks/useInView';
 
+const getAspectRatio = (size) => {
+  if (!size) return '4 / 5';
+  const [w, h] = size.split('x').map(Number);
+  if (!w || !h) return '4 / 5';
+  return `${w} / ${h}`;
+};
+
 export default function GalleryItem({ image, index, onClick }) {
   const [ref, isInView] = useInView();
 
@@ -14,7 +21,7 @@ export default function GalleryItem({ image, index, onClick }) {
       }`}
       style={{ transitionDelay: `${(index % 4) * 100}ms` }}
     >
-      <div className="aspect-[4/5] sm:aspect-[3/4] overflow-hidden relative">
+      <div className="overflow-hidden relative" style={{ aspectRatio: getAspectRatio(image.size) }}>
         <ImageWrapper
           src={image.imageUrl}
           alt={image.title || 'Creative Work'}

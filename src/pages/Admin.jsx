@@ -82,6 +82,7 @@ export default function Admin() {
   const [uploadYear, setUploadYear] = useState('');
   const [uploadNote, setUploadNote] = useState('');
   const [uploadOrder, setUploadOrder] = useState('0');
+  const [uploadSize, setUploadSize] = useState('1080x1350');
   const [uploadFile, setUploadFile] = useState(null);
   const [imageUploading, setImageUploading] = useState(false);
   const [imageUploadProgress, setImageUploadProgress] = useState(0);
@@ -289,7 +290,8 @@ export default function Admin() {
         title: uploadTitle,
         year: uploadYear,
         note: uploadNote,
-        order: parseInt(uploadOrder, 10) || 0
+        order: parseInt(uploadOrder, 10) || 0,
+        size: uploadSize
       });
       setImageUploadProgress(100);
 
@@ -297,6 +299,7 @@ export default function Admin() {
       setUploadYear('');
       setUploadNote('');
       setUploadOrder('0');
+      setUploadSize('1080x1350');
       setUploadFile(null);
       setImageUploadProgress(0);
       setImageUploading(false);
@@ -671,15 +674,31 @@ export default function Admin() {
                   </div>
                 </div>
 
-                <div className="space-y-1">
-                  <label className="text-[9px] font-bold tracking-widest uppercase text-neutral-400">Sorting Order</label>
-                  <input
-                    type="number"
-                    value={uploadOrder}
-                    onChange={(e) => setUploadOrder(e.target.value)}
-                    className="w-full bg-transparent border-b border-neutral-200 focus:border-accent text-sm font-light text-neutral-800 outline-none py-1.5 transition-colors duration-300"
-                    placeholder="0"
-                  />
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-1">
+                    <label className="text-[9px] font-bold tracking-widest uppercase text-neutral-400">Sorting Order</label>
+                    <input
+                      type="number"
+                      value={uploadOrder}
+                      onChange={(e) => setUploadOrder(e.target.value)}
+                      className="w-full bg-transparent border-b border-neutral-200 focus:border-accent text-sm font-light text-neutral-800 outline-none py-1.5 transition-colors duration-300"
+                      placeholder="0"
+                    />
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="text-[9px] font-bold tracking-widest uppercase text-neutral-400">Display Size</label>
+                    <select
+                      value={uploadSize}
+                      onChange={(e) => setUploadSize(e.target.value)}
+                      className="w-full bg-transparent border-b border-neutral-200 focus:border-accent text-xs font-light text-neutral-700 outline-none py-2 transition-colors cursor-pointer"
+                    >
+                      <option value="1080x1080">Square (1080x1080)</option>
+                      <option value="1080x1350">Portrait (1080x1350)</option>
+                      <option value="1920x1080">Landscape (1920x1080)</option>
+                      <option value="1080x1920">Story (1080x1920)</option>
+                    </select>
+                  </div>
                 </div>
 
                 <div className="space-y-2">
