@@ -618,11 +618,13 @@ const handleEditCategoryClick = (cat) => {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-[9px] font-bold tracking-widest uppercase text-neutral-400 block">Cover Image</label>
+                  <label className="text-[9px] font-bold tracking-widest uppercase text-neutral-400 block">
+                    Cover Image {editingCatId && <span className="normal-case font-light text-neutral-400">(leave empty to keep current image)</span>}
+                  </label>
                   <input
                     type="file"
                     accept="image/*"
-                    required
+                    required={!editingCatId}
                     onChange={(e) => setNewCatFile(e.target.files[0])}
                     className="w-full text-xs text-neutral-500 file:mr-4 file:py-2 file:px-4 file:border file:border-neutral-200 file:text-[10px] file:font-semibold file:tracking-widest file:uppercase file:bg-neutral-50 file:text-neutral-700 hover:file:bg-neutral-100 cursor-pointer"
                   />
