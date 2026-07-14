@@ -19,7 +19,7 @@ export default function CategoryTile({ category }) {
         <h3 className="text-[10px] sm:text-xs font-medium tracking-widest uppercase text-neutral-800 group-hover:text-accent transition-colors duration-300 truncate">
           {name}
         </h3>
-        <span className="hidden sm:inline text-xs text-neutral-400 font-light group-hover:translate-x-1 transition-transform duration-300 shrink-0">
+        <span className="inline text-[10px] sm:text-xs text-neutral-400 font-light group-hover:translate-x-1 transition-transform duration-300 shrink-0">
           View &rarr;
         </span>
       </div>
