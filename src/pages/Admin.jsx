@@ -78,7 +78,7 @@ export default function Admin() {
   const [catError, setCatError] = useState('');
   const [editingCatId, setEditingCatId] = useState(null);
 
-  // Image Upload State
+ // Image Upload State
   const [uploadCategory, setUploadCategory] = useState('');
   const [uploadTitle, setUploadTitle] = useState('');
   const [uploadYear, setUploadYear] = useState('');
@@ -90,6 +90,7 @@ export default function Admin() {
   const [imageUploadProgress, setImageUploadProgress] = useState(0);
   const [imageError, setImageError] = useState('');
   const [imageSuccess, setImageSuccess] = useState(false);
+  const [editingImageId, setEditingImageId] = useState(null);
 
   // Manage Images State
   const [selectedCategoryFilter, setSelectedCategoryFilter] = useState('');
@@ -312,26 +313,46 @@ const handleEditCategoryClick = (cat) => {
     setImageError('');
     setImageSuccess(false);
 
-    if (!uploadCategory || !uploadTitle || !uploadFile) {
+    const isEditing = !!editingImageId;
+
+    if (!uploadCategory || !uploadTitle || (!isEditing && !uploadFile)) {
       setImageError('Title, Category, and Image File are required.');
       return;
     }
 
-   setImageUploading(true);
+    setImageUploading(true);
     setImageUploadProgress(0);
     try {
-      const base64Image = await fileToCompressedBase64(uploadFile);
+      let base64Image = null;
+      if (uploadFile) {
+        base64Image = await fileToCompressedBase64(uploadFile);
+      }
       setImageUploadProgress(70);
 
-      await addDoc(collection(db, 'images'), {
-        categorySlug: uploadCategory,
-        imageUrl: base64Image,
-        title: uploadTitle,
-        year: uploadYear,
-        note: uploadNote,
-        order: parseInt(uploadOrder, 10) || 0,
-        size: uploadSize
-      });
+      if (isEditing) {
+        const updateData = {
+          categorySlug: uploadCategory,
+          title: uploadTitle,
+          year: uploadYear,
+          note: uploadNote,
+          order: parseInt(uploadOrder, 10) || 0,
+          size: uploadSize
+        };
+        if (base64Image) {
+          updateData.imageUrl = base64Image;
+        }
+        await updateDoc(doc(db, 'images', editingImageId), updateData);
+      } else {
+        await addDoc(collection(db, 'images'), {
+          categorySlug: uploadCategory,
+          imageUrl: base64Image,
+          title: uploadTitle,
+          year: uploadYear,
+          note: uploadNote,
+          order: parseInt(uploadOrder, 10) || 0,
+          size: uploadSize
+        });
+      }
       setImageUploadProgress(100);
 
       setUploadTitle('');
@@ -340,6 +361,7 @@ const handleEditCategoryClick = (cat) => {
       setUploadOrder('0');
       setUploadSize('1080x1350');
       setUploadFile(null);
+      setEditingImageId(null);
       setImageUploadProgress(0);
       setImageUploading(false);
       setImageSuccess(true);
@@ -352,6 +374,30 @@ const handleEditCategoryClick = (cat) => {
       setImageUploadProgress(0);
     }
   };
+  const handleEditImageClick = (img) => {
+    setEditingImageId(img.id);
+    setUploadCategory(img.categorySlug);
+    setUploadTitle(img.title || '');
+    setUploadYear(img.year || '');
+    setUploadNote(img.note || '');
+    setUploadOrder(String(img.order));
+    setUploadSize(img.size || '1080x1350');
+    setUploadFile(null);
+    setImageError('');
+    setActiveTab('upload');
+  };
+
+  const handleCancelEditImage = () => {
+    setEditingImageId(null);
+    setUploadTitle('');
+    setUploadYear('');
+    setUploadNote('');
+    setUploadOrder('0');
+    setUploadSize('1080x1350');
+    setUploadFile(null);
+    setImageError('');
+  };
+
   const handleDeleteImage = async (imageId) => {
     if (!window.confirm('Delete this image from this gallery?')) {
       return;
@@ -661,7 +707,7 @@ const handleEditCategoryClick = (cat) => {
         {activeTab === 'upload' && (
           <div className="max-w-xl mx-auto bg-white border border-neutral-200/60 p-8">
             <h3 className="text-[10px] font-bold tracking-widest uppercase text-neutral-400 mb-6 border-b border-neutral-100 pb-2">
-              Upload Image to Gallery
+              {editingImageId ? 'Edit Image Details' : 'Upload Image to Gallery'}
             </h3>
             
             {categories.length === 0 ? (
@@ -760,11 +806,13 @@ const handleEditCategoryClick = (cat) => {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-[9px] font-bold tracking-widest uppercase text-neutral-400 block">Image File</label>
+                  <label className="text-[9px] font-bold tracking-widest uppercase text-neutral-400 block">
+                    Image File {editingImageId && <span className="normal-case font-light text-neutral-400">(leave empty to keep current image)</span>}
+                  </label>
                   <input
                     type="file"
                     accept="image/*"
-                    required
+                    required={!editingImageId}
                     onChange={(e) => setUploadFile(e.target.files[0])}
                     className="w-full text-xs text-neutral-500 file:mr-4 file:py-2 file:px-4 file:border file:border-neutral-200 file:text-[10px] file:font-semibold file:tracking-widest file:uppercase file:bg-neutral-50 file:text-neutral-700 hover:file:bg-neutral-100 cursor-pointer"
                   />
@@ -779,13 +827,24 @@ const handleEditCategoryClick = (cat) => {
                   </div>
                 )}
 
-                <button
-                  type="submit"
-                  disabled={imageUploading}
-                  className="w-full text-center text-[10px] font-bold tracking-widest uppercase text-white bg-neutral-900 hover:bg-accent transition-colors duration-300 py-4 border border-neutral-950 disabled:bg-neutral-200 disabled:border-neutral-200"
-                >
-                  {imageUploading ? 'Uploading Image...' : 'Upload Image'}
-                </button>
+                <div className="flex gap-2">
+                  <button
+                    type="submit"
+                    disabled={imageUploading}
+                    className="flex-1 text-center text-[10px] font-bold tracking-widest uppercase text-white bg-neutral-900 hover:bg-accent transition-colors duration-300 py-4 border border-neutral-950 disabled:bg-neutral-200 disabled:border-neutral-200"
+                  >
+                    {imageUploading ? 'Saving...' : editingImageId ? 'Update Image' : 'Upload Image'}
+                  </button>
+                  {editingImageId && (
+                    <button
+                      type="button"
+                      onClick={handleCancelEditImage}
+                      className="text-[10px] font-bold tracking-widest uppercase text-neutral-500 border border-neutral-300 hover:bg-neutral-50 transition-colors duration-300 px-4 py-4"
+                    >
+                      Cancel
+                    </button>
+                  )}
+                </div>
               </form>
             )}
           </div>
@@ -831,12 +890,20 @@ const handleEditCategoryClick = (cat) => {
                       <h4 className="text-[10px] font-semibold tracking-wider text-neutral-800 uppercase mt-2.5 truncate">{img.title}</h4>
                       <p className="text-[8px] text-neutral-400 tracking-wider font-light mt-0.5">Order: {img.order} {img.year ? `• ${img.year}` : ''}</p>
                     </div>
-                    <button
-                      onClick={() => handleDeleteImage(img.id)}
-                      className="text-[9px] text-red-500 hover:text-red-700 tracking-widest font-semibold uppercase border border-red-100 hover:border-red-400 py-1.5 mt-3 transition-colors"
-                    >
-                      Delete Image
-                    </button>
+                    <div className="flex gap-2 mt-3">
+                      <button
+                        onClick={() => handleEditImageClick(img)}
+                        className="flex-1 text-[9px] text-neutral-500 hover:text-neutral-800 tracking-widest font-semibold uppercase border border-neutral-200 hover:border-neutral-500 py-1.5 transition-colors"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => handleDeleteImage(img.id)}
+                        className="flex-1 text-[9px] text-red-500 hover:text-red-700 tracking-widest font-semibold uppercase border border-red-100 hover:border-red-400 py-1.5 transition-colors"
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </div>
                 ))}
               </div>
