@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  signInWithEmailAndPassword, 
-  signOut, 
-  onAuthStateChanged 
+import {
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
+  setPersistence,
+  browserSessionPersistence
 } from 'firebase/auth';
 import {
   collection,
@@ -192,6 +194,7 @@ export default function Admin() {
     setLoginError('');
     setLoginLoading(true);
     try {
+      await setPersistence(auth, browserSessionPersistence);
       await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
     } catch (error) {
       console.error(error);
