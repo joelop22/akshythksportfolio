@@ -4,15 +4,16 @@ import {
   signOut, 
   onAuthStateChanged 
 } from 'firebase/auth';
-import { 
-  collection, 
-  addDoc, 
-  getDocs, 
-  doc, 
-  deleteDoc, 
-  query, 
-  orderBy, 
-  where 
+import {
+  collection,
+  addDoc,
+  getDocs,
+  doc,
+  deleteDoc,
+  updateDoc,
+  query,
+  orderBy,
+  where
 } from 'firebase/firestore';
 import { auth, db } from '../lib/firebase';
 import SEO from '../components/SEO';
@@ -66,7 +67,7 @@ export default function Admin() {
   const [loginError, setLoginError] = useState('');
   const [loginLoading, setLoginLoading] = useState(false);
 
-  // Categories State
+// Categories State
   const [categories, setCategories] = useState([]);
   const [newCatName, setNewCatName] = useState('');
   const [newCatSlug, setNewCatSlug] = useState('');
@@ -75,6 +76,7 @@ export default function Admin() {
   const [catUploading, setCatUploading] = useState(false);
   const [catUploadProgress, setCatUploadProgress] = useState(0);
   const [catError, setCatError] = useState('');
+  const [editingCatId, setEditingCatId] = useState(null);
 
   // Image Upload State
   const [uploadCategory, setUploadCategory] = useState('');
@@ -221,29 +223,48 @@ export default function Admin() {
   const handleCreateCategory = async (e) => {
     e.preventDefault();
     setCatError('');
-    if (!newCatName || !newCatSlug || !newCatFile) {
+
+    const isEditing = !!editingCatId;
+
+    if (!newCatName || !newCatSlug || (!isEditing && !newCatFile)) {
       setCatError('All fields (including cover image file) are required.');
       return;
     }
 
-  setCatUploading(true);
+    setCatUploading(true);
     setCatUploadProgress(0);
     try {
-      const base64Image = await fileToCompressedBase64(newCatFile);
+      let coverImageUrl = null;
+      if (newCatFile) {
+        coverImageUrl = await fileToCompressedBase64(newCatFile);
+      }
       setCatUploadProgress(70);
 
-      await addDoc(collection(db, 'categories'), {
-        name: newCatName,
-        slug: newCatSlug,
-        order: parseInt(newCatOrder, 10) || 0,
-        coverImageUrl: base64Image
-      });
+      if (isEditing) {
+        const updateData = {
+          name: newCatName,
+          slug: newCatSlug,
+          order: parseInt(newCatOrder, 10) || 0
+        };
+        if (coverImageUrl) {
+          updateData.coverImageUrl = coverImageUrl;
+        }
+        await updateDoc(doc(db, 'categories', editingCatId), updateData);
+      } else {
+        await addDoc(collection(db, 'categories'), {
+          name: newCatName,
+          slug: newCatSlug,
+          order: parseInt(newCatOrder, 10) || 0,
+          coverImageUrl: coverImageUrl
+        });
+      }
       setCatUploadProgress(100);
 
       setNewCatName('');
       setNewCatSlug('');
       setNewCatOrder('0');
       setNewCatFile(null);
+      setEditingCatId(null);
       setCatUploadProgress(0);
       setCatUploading(false);
 
@@ -255,6 +276,24 @@ export default function Admin() {
       setCatUploadProgress(0);
     }
   };
+const handleEditCategoryClick = (cat) => {
+    setEditingCatId(cat.id);
+    setNewCatName(cat.name);
+    setNewCatSlug(cat.slug);
+    setNewCatOrder(String(cat.order));
+    setNewCatFile(null);
+    setCatError('');
+  };
+
+  const handleCancelEditCategory = () => {
+    setEditingCatId(null);
+    setNewCatName('');
+    setNewCatSlug('');
+    setNewCatOrder('0');
+    setNewCatFile(null);
+    setCatError('');
+  };
+
 
   const handleDeleteCategory = async (catId, catSlug) => {
     if (!window.confirm(`Are you sure you want to delete this category? (Note: images associated with it in Firestore will not be automatically deleted).`)) {
@@ -488,7 +527,7 @@ export default function Admin() {
             {/* Create Category Form */}
             <div className="lg:col-span-1 bg-white border border-neutral-200/60 p-6">
               <h3 className="text-[10px] font-bold tracking-widest uppercase text-neutral-400 mb-6 border-b border-neutral-100 pb-2">
-                New Category
+                {editingCatId ? 'Edit Category' : 'New Category'}
               </h3>
               <form onSubmit={handleCreateCategory} className="space-y-5">
                 {catError && (
@@ -552,13 +591,24 @@ export default function Admin() {
                   </div>
                 )}
 
-                <button
-                  type="submit"
-                  disabled={catUploading}
-                  className="w-full text-center text-[10px] font-bold tracking-widest uppercase text-white bg-neutral-900 hover:bg-accent transition-colors duration-300 py-3 disabled:bg-neutral-200"
-                >
-                  {catUploading ? 'Saving...' : 'Add Category'}
-                </button>
+                <div className="flex gap-2">
+                  <button
+                    type="submit"
+                    disabled={catUploading}
+                    className="flex-1 text-center text-[10px] font-bold tracking-widest uppercase text-white bg-neutral-900 hover:bg-accent transition-colors duration-300 py-3 disabled:bg-neutral-200"
+                  >
+                    {catUploading ? 'Saving...' : editingCatId ? 'Update Category' : 'Add Category'}
+                  </button>
+                  {editingCatId && (
+                    <button
+                      type="button"
+                      onClick={handleCancelEditCategory}
+                      className="text-[10px] font-bold tracking-widest uppercase text-neutral-500 border border-neutral-300 hover:bg-neutral-50 transition-colors duration-300 px-4 py-3"
+                    >
+                      Cancel
+                    </button>
+                  )}
+                </div>
               </form>
             </div>
 
@@ -585,12 +635,20 @@ export default function Admin() {
                           <p className="text-[10px] text-neutral-400 font-light mt-0.5">Slug: {cat.slug} &bull; Order: {cat.order}</p>
                         </div>
                       </div>
-                      <button
-                        onClick={() => handleDeleteCategory(cat.id, cat.slug)}
-                        className="text-[9px] text-red-500 hover:text-red-700 tracking-widest font-semibold uppercase border border-red-200 hover:border-red-500 px-2 py-1 transition-colors"
-                      >
-                        Delete
-                      </button>
+                      <div className="flex gap-2">
+                        <button
+                          onClick={() => handleEditCategoryClick(cat)}
+                          className="text-[9px] text-neutral-500 hover:text-neutral-800 tracking-widest font-semibold uppercase border border-neutral-200 hover:border-neutral-500 px-2 py-1 transition-colors"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          onClick={() => handleDeleteCategory(cat.id, cat.slug)}
+                          className="text-[9px] text-red-500 hover:text-red-700 tracking-widest font-semibold uppercase border border-red-200 hover:border-red-500 px-2 py-1 transition-colors"
+                        >
+                          Delete
+                        </button>
+                      </div>
                     </div>
                   ))}
                 </div>
