@@ -54,10 +54,10 @@ export default function Home() {
             <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
             Photographer
           </p>
-          <h1 className="text-4xl sm:text-5xl md:text-8xl font-light tracking-tight text-neutral-900 leading-[1.05] font-display mt-4 sm:mt-6">
+         <h1 className="text-4xl sm:text-5xl md:text-8xl font-light tracking-tight text-neutral-100 leading-[1.05] font-display mt-4 sm:mt-6">
             Akshyth ks
           </h1>
-          <p className="text-sm sm:text-base md:text-lg text-neutral-500 font-light leading-relaxed pt-4 sm:pt-6 max-w-xl">
+          <p className="text-sm sm:text-base md:text-lg text-neutral-400 font-light leading-relaxed pt-4 sm:pt-6 max-w-xl">
             Photographer shooting on Fujifilm X-T5, from candid weddings and portraits to street life and classical dance.
           </p>
         </div>
