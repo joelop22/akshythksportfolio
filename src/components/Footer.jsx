@@ -5,7 +5,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-neutral-200/50 bg-white select-none">
+    <footer className="border-t border-neutral-800/50 bg-offwhite select-none">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-8 flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4">
         <p className="text-[9px] sm:text-[10px] tracking-widest uppercase text-neutral-400 font-light">
           <Link 
@@ -22,7 +22,7 @@ export default function Footer() {
             href="https://www.instagram.com/akshythks/" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="text-[9px] sm:text-[10px] tracking-widest uppercase text-neutral-400 hover:text-neutral-900 transition-colors duration-300 font-light"
+            className="text-[9px] sm:text-[10px] tracking-widest uppercase text-neutral-400 hover:text-neutral-100 transition-colors duration-300 font-light"
           >
             Instagram
           </a>
@@ -30,7 +30,7 @@ export default function Footer() {
            href="https://wa.me/919946865923"
             target="_blank" 
             rel="noopener noreferrer"
-            className="text-[9px] sm:text-[10px] tracking-widest uppercase text-neutral-400 hover:text-neutral-900 transition-colors duration-300 font-light"
+            className="text-[9px] sm:text-[10px] tracking-widest uppercase text-neutral-400 hover:text-neutral-100 font-semibold transition-colors duration-300"
           >
             Whatsapp
           </a>

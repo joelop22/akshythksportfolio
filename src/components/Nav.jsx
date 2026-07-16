@@ -10,7 +10,7 @@ export default function Nav() {
   ];
 
   return (
-    <nav className="bg-white/80 backdrop-blur-md sticky top-0 z-40 select-none border-b border-neutral-200/50">
+    <nav className="bg-offwhite/80 backdrop-blur-md sticky top-0 z-40 select-none border-b border-neutral-800/50">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex justify-between items-center gap-3">
         {/* Brand Logo */}
         <Link
@@ -32,7 +32,7 @@ export default function Nav() {
                 `text-[10px] font-semibold tracking-widest uppercase transition-colors duration-300 relative py-1 ${
                   isActive
                     ? 'text-accent font-bold'
-                    : 'text-neutral-400 hover:text-neutral-900'
+                    : 'text-neutral-500 hover:text-neutral-100'
                 }`
               }
             >
@@ -49,7 +49,7 @@ export default function Nav() {
         </div>
 
         {/* Mobile Capsule Nav — all links fit inline, no hamburger/drawer required */}
-        <div className="md:hidden flex items-center bg-neutral-100/80 rounded-full p-1 gap-0.5 border border-neutral-200/60">
+        <div className="md:hidden flex items-center bg-neutral-900/80 rounded-full p-1 gap-0.5 border border-neutral-800/60">
           {links.map((link) => (
             <NavLink
               key={link.name}
