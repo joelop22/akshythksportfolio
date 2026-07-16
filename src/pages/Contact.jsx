@@ -71,8 +71,8 @@ export default function Contact() {
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 sm:gap-12 md:gap-20 items-start animate-fade-in">
         <div className="space-y-8 select-none">
-          <div className="border-b border-neutral-200 pb-4">
-            <h1 className="text-2xl md:text-3xl font-light tracking-tight text-neutral-900 font-display">
+          <div className="border-b border-neutral-800 pb-4">
+            <h1 className="text-2xl md:text-3xl font-light tracking-tight text-neutral-100 font-display">
               Get in Touch
             </h1>
             <p className="text-xs text-neutral-400 mt-2 font-light tracking-widest uppercase">
@@ -80,15 +80,15 @@ export default function Contact() {
             </p>
           </div>
           
-          <div className="space-y-4 text-sm text-neutral-500 font-light leading-relaxed">
+          <div className="space-y-4 text-sm text-neutral-400 font-light leading-relaxed">
             <p>
               For bookings, collaborations, or licensing requests, please write a message using the form, or reach out directly through the channels below.
             </p>
           </div>
 
           <div className="space-y-2 pt-4">
-            <span className="font-semibold text-neutral-800 uppercase tracking-widest text-[10px] block mb-2">Socials</span>
-            <div className="flex flex-col space-y-2 text-xs font-light text-neutral-500">
+            <span className="font-semibold text-neutral-200 uppercase tracking-widest text-[10px] block mb-2">Socials</span>
+            <div className="flex flex-col space-y-2 text-xs font-light text-neutral-400">
               <a href="https://www.behance.net/akshythakshyth" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors w-max">
                 Behance
               </a>
@@ -99,8 +99,8 @@ export default function Contact() {
           </div>
         </div>
 
-        <div className="bg-white border border-neutral-200/60 p-6 sm:p-10">
-          <h2 className="text-[10px] font-bold tracking-[0.25em] text-neutral-400 uppercase mb-8 pb-2 border-b border-neutral-100">
+        <div className="bg-neutral-900 border border-neutral-800/60 p-6 sm:p-10">
+          <h2 className="text-[10px] font-bold tracking-[0.25em] text-neutral-400 uppercase mb-8 pb-2 border-b border-neutral-800">
             Send a Message
           </h2>
 
@@ -109,15 +109,15 @@ export default function Contact() {
               <div className="w-10 h-10 border border-accent rounded-full flex items-center justify-center mx-auto">
                 <span className="text-accent text-sm">&#10003;</span>
               </div>
-              <h3 className="text-sm font-semibold tracking-wide text-neutral-800 uppercase">
+              <h3 className="text-sm font-semibold tracking-wide text-neutral-200 uppercase">
                 Message Sent
               </h3>
-              <p className="text-xs text-neutral-500 font-light max-w-xs mx-auto leading-relaxed">
+              <p className="text-xs text-neutral-400 font-light max-w-xs mx-auto leading-relaxed">
                 Thank you for your message. Redirecting you to WhatsApp...
               </p>
               <button 
                 onClick={() => setStatus('IDLE')}
-                className="mt-4 text-[10px] font-bold tracking-widest uppercase text-accent hover:text-neutral-900 transition-colors"
+                className="mt-4 text-[10px] font-bold tracking-widest uppercase text-accent hover:text-neutral-100 transition-colors"
               >
                 Send Another Message
               </button>
@@ -142,7 +142,7 @@ export default function Contact() {
                   disabled={status === 'SENDING'}
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full bg-transparent border-b border-neutral-200 focus:border-accent text-sm font-light text-neutral-800 outline-none py-2.5 transition-colors duration-300"
+                  className="w-full bg-transparent border-b border-neutral-800 focus:border-accent text-sm font-light text-neutral-200 outline-none py-2.5 transition-colors duration-300"
                   placeholder="Your name"
                 />
               </div>
@@ -159,7 +159,7 @@ export default function Contact() {
                   disabled={status === 'SENDING'}
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full bg-transparent border-b border-neutral-200 focus:border-accent text-sm font-light text-neutral-800 outline-none py-2.5 transition-colors duration-300"
+                  className="w-full bg-transparent border-b border-neutral-800 focus:border-accent text-sm font-light text-neutral-200 outline-none py-2.5 transition-colors duration-300"
                   placeholder="your.email@domain.com"
                 />
               </div>
@@ -176,7 +176,7 @@ export default function Contact() {
                   disabled={status === 'SENDING'}
                   value={formData.mobile}
                   onChange={handleChange}
-                  className="w-full bg-transparent border-b border-neutral-200 focus:border-accent text-sm font-light text-neutral-800 outline-none py-2.5 transition-colors duration-300"
+                  className="w-full bg-transparent border-b border-neutral-800 focus:border-accent text-sm font-light text-neutral-200 outline-none py-2.5 transition-colors duration-300"
                   placeholder="+91 XXXXX XXXXX"
                 />
               </div>
@@ -192,7 +192,7 @@ export default function Contact() {
                   disabled={status === 'SENDING'}
                   value={formData.subject}
                   onChange={handleChange}
-                  className="w-full bg-transparent border-b border-neutral-200 focus:border-accent text-sm font-light text-neutral-800 outline-none py-2.5 transition-colors duration-300"
+                  className="w-full bg-transparent border-b border-neutral-800 focus:border-accent text-sm font-light text-neutral-200 outline-none py-2.5 transition-colors duration-300"
                   placeholder="Inquiry topic"
                 />
               </div>
@@ -209,7 +209,7 @@ export default function Contact() {
                   disabled={status === 'SENDING'}
                   value={formData.message}
                   onChange={handleChange}
-                  className="w-full bg-transparent border-b border-neutral-200 focus:border-accent text-sm font-light text-neutral-800 outline-none py-2.5 resize-none transition-colors duration-300"
+                  className="w-full bg-transparent border-b border-neutral-800 focus:border-accent text-sm font-light text-neutral-200 outline-none py-2.5 resize-none transition-colors duration-300"
                   placeholder="Write your message here..."
                 />
               </div>
