@@ -17,7 +17,7 @@ export default function About() {
       <SEO title="About" description="Biography and skills of photographer and visual director Akshythks ks." />
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-start animate-fade-in">
-        <div className="aspect-[4/5] max-w-xs sm:max-w-none mx-auto md:mx-0 w-full overflow-hidden bg-neutral-100 border border-neutral-200/50">
+        <div className="aspect-[4/5] max-w-xs sm:max-w-none mx-auto md:mx-0 w-full overflow-hidden bg-neutral-900 border border-neutral-800/50">
           <ImageWrapper
             src="/profile.jpg"
             alt="Akshythks ks portrait"
@@ -27,8 +27,8 @@ export default function About() {
         </div>
 
         <div className="space-y-8 select-none">
-          <div className="border-b border-neutral-200 pb-4">
-            <h1 className="text-2xl md:text-3xl font-light tracking-tight text-neutral-900 font-display">
+          <div className="border-b border-neutral-800 pb-4">
+            <h1 className="text-2xl md:text-3xl font-light tracking-tight text-neutral-100 font-display">
               Akshyth ks
             </h1>
             <p className="text-xs text-neutral-400 mt-2 font-light tracking-widest uppercase">
@@ -36,7 +36,7 @@ export default function About() {
             </p>
           </div>
 
-          <div className="space-y-4 text-sm text-neutral-500 leading-relaxed font-light">
+          <div className="space-y-4 text-sm text-neutral-400 leading-relaxed font-light">
             <p>
               I am a professional photographer and visual director based in India. Leveraging the tactile colors of the Fujifilm XT-5 and the surgical precision of Lightroom, my work captures high-fashion editorials, intimate portraiture, and cinematic storytelling.
             </p>
@@ -56,7 +56,7 @@ export default function About() {
               {skills.map((skill) => (
                 <span 
                   key={skill}
-                  className="text-[10px] tracking-widest uppercase bg-white border border-neutral-200/80 px-3.5 py-2 text-neutral-600 font-medium"
+                  className="text-[10px] tracking-widest uppercase bg-neutral-900 border border-neutral-800 px-3.5 py-2 text-neutral-300 font-medium"
                 >
                   {skill}
                 </span>
