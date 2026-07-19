@@ -50,13 +50,13 @@ export default function Lightbox({
       onClick={handleBackdropClick}
     >
       {/* Top Bar (Close and Navigation Counts) */}
-      <div className="w-full flex justify-between items-center px-6 py-4 border-b border-neutral-100">
+      <div className="w-full flex justify-between items-center px-6 py-4 border-b border-neutral-800">
         <span className="text-xs tracking-widest text-neutral-400 uppercase font-light">
           {currentIndex + 1} &mdash; {images.length}
         </span>
         <button 
           onClick={onClose}
-          className="text-neutral-500 hover:text-neutral-900 transition-colors p-2"
+          className="text-neutral-400 hover:text-neutral-100 transition-colors p-2"
           aria-label="Close Lightbox"
         >
           <X size={20} strokeWidth={1.5} />
@@ -69,7 +69,7 @@ export default function Lightbox({
         <button 
           onClick={onPrev}
           disabled={images.length <= 1}
-          className="text-neutral-400 hover:text-neutral-900 disabled:opacity-0 transition-colors p-3 absolute left-4 sm:left-8 z-20"
+          className="text-neutral-400 hover:text-neutral-100 disabled:opacity-0 transition-colors p-3 absolute left-4 sm:left-8 z-20"
           aria-label="Previous Image"
         >
           <ChevronLeft size={32} strokeWidth={1.2} />
@@ -90,7 +90,7 @@ export default function Lightbox({
         <button 
           onClick={onNext}
           disabled={images.length <= 1}
-          className="text-neutral-400 hover:text-neutral-900 disabled:opacity-0 transition-colors p-3 absolute right-4 sm:right-8 z-20"
+          className="text-neutral-400 hover:text-neutral-100 disabled:opacity-0 transition-colors p-3 absolute right-4 sm:right-8 z-20"
           aria-label="Next Image"
         >
           <ChevronRight size={32} strokeWidth={1.2} />
@@ -98,13 +98,13 @@ export default function Lightbox({
       </div>
 
       {/* Metadata Bottom Drawer */}
-      <div className="w-full bg-white border-t border-neutral-100 px-6 py-6 text-center select-none z-10">
+      <div className="w-full bg-neutral-900 border-t border-neutral-800 px-6 py-6 text-center select-none z-10">
         <div className="max-w-xl mx-auto space-y-1">
-          <h2 className="text-sm font-medium tracking-wide uppercase text-neutral-800">
+          <h2 className="text-sm font-medium tracking-wide uppercase text-neutral-200">
             {activeImage.title || 'Untitled'}
           </h2>
           {(activeImage.year || activeImage.note) && (
-            <p className="text-xs text-neutral-500 font-light flex items-center justify-center gap-2">
+            <p className="text-xs text-neutral-400 font-light flex items-center justify-center gap-2">
               {activeImage.year && <span className="font-medium">{activeImage.year}</span>}
               {activeImage.year && activeImage.note && <span>&bull;</span>}
               {activeImage.note && <span>{activeImage.note}</span>}

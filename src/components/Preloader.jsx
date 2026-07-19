@@ -7,7 +7,7 @@ export default function Preloader({ isLoading }) {
         isLoading ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
       }`}
     >
-      <span className="font-display text-2xl sm:text-3xl tracking-widest text-neutral-900">
+      <span className="font-display text-2xl sm:text-3xl tracking-widest text-neutral-100">
         Akshyth ks
       </span>
     </div>

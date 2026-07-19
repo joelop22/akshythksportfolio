@@ -109,17 +109,17 @@ export default function Gallery() {
 
       <div className="space-y-8 sm:space-y-10 animate-fade-in">
         {/* Navigation Breadcrumb & Header */}
-        <div className="border-b border-neutral-200 pb-5 sm:pb-6 select-none">
+        <div className="border-b border-neutral-800 pb-5 sm:pb-6 select-none">
           <div className="text-[9px] sm:text-[10px] tracking-widest text-neutral-400 uppercase font-semibold flex items-center gap-2">
-            <Link to="/work" className="hover:text-neutral-900 transition-colors">Work</Link>
+            <Link to="/work" className="hover:text-neutral-100 transition-colors">Work</Link>
             <span>/</span>
-            <span className="text-neutral-500 font-normal">{categoryName}</span>
+            <span className="text-neutral-400 font-normal">{categoryName}</span>
           </div>
-          <h1 className="text-2xl md:text-3xl font-light tracking-tight text-neutral-900 pt-2 font-display">
+          <h1 className="text-2xl md:text-3xl font-light tracking-tight text-neutral-100 pt-2 font-display">
             {categoryName}
           </h1>
           {description && (
-            <p className="text-xs sm:text-sm text-neutral-500 font-light leading-relaxed mt-2 max-w-xl">
+            <p className="text-xs sm:text-sm text-neutral-400 font-light leading-relaxed mt-2 max-w-xl">
               {description}
             </p>
           )}

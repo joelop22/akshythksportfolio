@@ -4,7 +4,7 @@ import GalleryItem from './GalleryItem';
 export default function GalleryGrid({ images, onImageClick }) {
   if (!images || images.length === 0) {
     return (
-      <div className="text-center py-20 border-t border-neutral-100">
+      <div className="text-center py-20 border-t border-neutral-800">
         <p className="text-xs text-neutral-400 font-light tracking-widest uppercase">
           No works found in this gallery.
         </p>
