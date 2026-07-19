@@ -23,6 +23,8 @@ export default function About() {
             alt="Akshythks ks portrait"
             className="w-full h-full"
             imgClassName="object-cover"
+            loading="eager"
+            fetchpriority="high"
           />
         </div>
 
