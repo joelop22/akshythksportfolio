@@ -16,7 +16,7 @@ export default function CategoryTile({ category }) {
         />
       </div>
       <div className="pt-2 sm:pt-3 pb-2 border-b border-neutral-800 flex justify-between items-baseline gap-2">
-        <h3 className="text-[10px] sm:text-xs font-medium tracking-widest uppercase text-neutral-200 group-hover:text-accent transition-colors duration-300 truncate">
+        <h3 className="text-[10px] sm:text-xs font-medium tracking-widest uppercase text-neutral-200 group-hover:text-accent transition-colors duration-300 truncate font-display">
           {name}
         </h3>
         <span className="inline text-[10px] sm:text-xs text-neutral-400 font-light group-hover:translate-x-1 transition-transform duration-300 shrink-0">

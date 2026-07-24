@@ -75,7 +75,7 @@ export default function Home() {
         {/* All Galleries */}
         <div className="pt-10 sm:pt-16 border-t border-neutral-200/50 relative z-10">
           <div className="mb-8 sm:mb-12">
-            <h2 className="text-[10px] font-bold tracking-[0.3em] text-neutral-400 uppercase">
+            <h2 className="text-[10px] font-bold tracking-[0.4em] text-neutral-400 uppercase">
               Galleries
             </h2>
           </div>

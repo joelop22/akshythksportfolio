@@ -29,7 +29,7 @@ export default function Nav() {
               to={link.path}
               end={link.path === '/'}
               className={({ isActive }) =>
-                `text-[10px] font-semibold tracking-widest uppercase transition-colors duration-300 relative py-1 ${
+                `text-[10px] font-semibold tracking-[0.25em] uppercase transition-colors duration-300 relative py-1 ${
                   isActive
                     ? 'text-accent font-bold'
                     : 'text-neutral-500 hover:text-neutral-100'
@@ -58,8 +58,8 @@ export default function Nav() {
               className={({ isActive }) =>
                 `text-[9px] font-semibold tracking-wider uppercase px-2.5 py-1.5 rounded-full whitespace-nowrap transition-colors duration-300 ${
                   isActive
-                    ? 'bg-neutral-900 text-white'
-                    : 'text-neutral-500 hover:text-neutral-900'
+                    ? 'bg-accent text-neutral-950'
+                    : 'text-neutral-500 hover:text-neutral-100'
                 }`
               }
             >
