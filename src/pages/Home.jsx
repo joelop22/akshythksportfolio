@@ -49,6 +49,14 @@ export default function Home() {
       <SEO title="Home" description="Portfolio of photographer Akshyth ks — pre-wedding, portraits, street, and event photography." />
 
       <div className="flex flex-col flex-1 relative">
+        {/* Radial glow behind hero name */}
+        <div
+          className="absolute top-1/4 left-1/4 w-[600px] h-[600px] pointer-events-none z-0 -translate-x-1/2 -translate-y-2/2"
+          style={{
+            background: 'radial-gradient(circle, rgba(100, 77, 45, 0.12), transparent 50%)',
+            filter: 'blur(70px)'
+          }}
+        ></div>
         {/* Hero Section */}
         <div className="py-10 sm:py-16 md:py-24 relative z-10 animate-fade-in max-w-3xl">
           <p className="text-[9px] sm:text-[10px] tracking-[0.3em] sm:tracking-[0.4em] text-neutral-400 uppercase font-bold flex items-center gap-2">
