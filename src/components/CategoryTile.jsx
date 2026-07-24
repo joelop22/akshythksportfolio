@@ -7,7 +7,7 @@ export default function CategoryTile({ category }) {
 
   return (
     <Link to={`/work/${slug}`} className="group block select-none">
-      <div className="aspect-[4/3] overflow-hidden bg-neutral-900 relative border border-neutral-800">
+     <div className="aspect-[4/3] overflow-hidden bg-neutral-900 relative border border-neutral-800 transition-shadow duration-500 group-hover:shadow-[0_0_30px_rgba(197,168,128,0.15)]">
         <ImageWrapper
           src={coverImageUrl}
           alt={name}
