@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { collection, getDocs, query, orderBy } from 'firebase/firestore';
 import { db } from '../lib/firebase';
 import SEO from '../components/SEO';
+import SocialIcons from '../components/SocialIcons';
 import CategoryTile from '../components/CategoryTile';
 import LoadingSpinner from '../components/LoadingSpinner';
 import ContactSection from '../components/ContactSection';
@@ -60,6 +61,7 @@ export default function Home() {
           <p className="text-sm sm:text-base md:text-lg text-neutral-400 font-light leading-relaxed pt-4 sm:pt-6 max-w-xl">
             Photographer shooting on Fujifilm X-T5, from candid weddings and portraits to street life and classical dance.
           </p>
+          <SocialIcons className="pt-6" />
         </div>
 
         {/* All Galleries */}
