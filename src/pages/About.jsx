@@ -1,6 +1,7 @@
 import React from 'react';
 import SEO from '../components/SEO';
 import ImageWrapper from '../components/ImageWrapper';
+import SocialIcons from '../components/SocialIcons';
 
 export default function About() {
   const skills = [
@@ -65,8 +66,7 @@ export default function About() {
               ))}
             </div>
           </div>
-
-        
+          <SocialIcons className="pt-4" />
         </div>
       </div>
     </>

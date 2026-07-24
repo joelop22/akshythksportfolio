@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../lib/firebase';
 import SEO from '../components/SEO';
-
+import SocialIcons from '../components/SocialIcons';
 const WHATSAPP_NUMBER = '919946865923';
 
 export default function Contact() {
