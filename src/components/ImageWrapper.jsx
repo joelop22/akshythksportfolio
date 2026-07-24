@@ -29,6 +29,7 @@ export default function ImageWrapper({
   ...props 
 }) {
   const [failed, setFailed] = React.useState(false);
+  const [loaded, setLoaded] = React.useState(false);
   const handleContextMenu = (e) => {
     e.preventDefault();
   };
@@ -54,7 +55,8 @@ export default function ImageWrapper({
         loading={loading}
         draggable={false}
         onError={() => setFailed(true)}
-       className={`image-protect w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110 ${imgClassName}`}
+        onLoad={() => setLoaded(true)}
+        className={`image-protect w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110 ${loaded ? 'focus-pull-loaded' : 'focus-pull-loading'} ${imgClassName}`}
         {...props}
       />
       {/* 

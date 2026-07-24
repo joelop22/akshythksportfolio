@@ -55,6 +55,23 @@
 .lightbox-image-enter {
   animation: fadeInScale 0.4s ease-out;
 }
+@keyframes focusPull {
+  from {
+    filter: blur(16px);
+    transform: scale(1.03);
+  }
+  to {
+    filter: blur(0px);
+    transform: scale(1);
+  }
+}
+.focus-pull-loaded {
+  animation: focusPull 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+.focus-pull-loading {
+  filter: blur(16px);
+  transform: scale(1.03);
+}
 
 /* Image protection utility class */
 .image-protect {
