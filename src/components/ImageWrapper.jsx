@@ -56,7 +56,7 @@ export default function ImageWrapper({
         draggable={false}
         onError={() => setFailed(true)}
         onLoad={() => setLoaded(true)}
-        className={`image-protect w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110 ${loaded ? 'focus-pull-loaded' : 'focus-pull-loading'} ${imgClassName}`}
+        className={`image-protect w-full h-full object-cover transition-transform duration-500 ease-brand group-hover:scale-110 ${loaded ? 'focus-pull-loaded' : 'focus-pull-loading'} ${imgClassName}`}
         {...props}
       />
       {/* 

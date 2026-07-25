@@ -3,7 +3,7 @@ import React from 'react';
 export default function Preloader({ isLoading }) {
   return (
     <div
-      className={`fixed inset-0 z-[100] bg-offwhite flex items-center justify-center transition-opacity duration-700 ease-out ${
+      className={`fixed inset-0 z-[100] bg-offwhite flex items-center justify-center transition-opacity duration-700 ease-brand ${
         isLoading ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
       }`}
     >

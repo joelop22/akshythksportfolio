@@ -12,7 +12,7 @@ export default function CategoryTile({ category }) {
           src={coverImageUrl}
           alt={name}
           className="w-full h-full"
-          imgClassName="group-hover:scale-[1.03] transition-transform duration-700 ease-out"
+          imgClassName="group-hover:scale-[1.03] transition-transform duration-700 ease-brand"
         />
       </div>
       <div className="pt-2 sm:pt-3 pb-2 border-b border-neutral-800 flex justify-between items-baseline gap-2">

@@ -44,7 +44,7 @@ export default function Lightbox({
 
   return (
     <div
-      className={`fixed inset-0 z-50 flex flex-col justify-between bg-black/95 backdrop-blur-md transition-opacity duration-300 ease-out ${
+      className={`fixed inset-0 z-50 flex flex-col justify-between bg-black/95 backdrop-blur-md transition-opacity duration-300 ease-brand ${
         visible ? 'opacity-100' : 'opacity-0'
       }`}
       onClick={handleBackdropClick}
