@@ -8,6 +8,7 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import ContactSection from '../components/ContactSection';
 import { GALLERIES } from '../data/galleries';
 import RevealOnScroll from '../components/RevealOnScroll';
+import ApertureGraphic from '../components/ApertureGraphic';
 
 export default function Home() {
   const [categories, setCategories] = useState(GALLERIES);
@@ -49,16 +50,18 @@ export default function Home() {
       <SEO title="Home" description="Portfolio of photographer Akshyth ks — pre-wedding, portraits, street, and event photography." />
 
       <div className="flex flex-col flex-1 relative">
-        {/* Radial glow behind hero name */}
-        <div
-          className="absolute top-1/4 left-1/4 w-[600px] h-[600px] pointer-events-none z-0 -translate-x-1/2 -translate-y-2/2"
-          style={{
-            background: 'radial-gradient(circle, rgba(100, 77, 45, 0.12), transparent 50%)',
-            filter: 'blur(70px)'
-          }}
-        ></div>
-        {/* Hero Section */}
-        <div className="py-10 sm:py-16 md:py-24 relative z-10 animate-fade-in max-w-3xl">
+        {/* Hero Section (with its own positioning context) */}
+        <div className="relative">
+          <ApertureGraphic className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 w-[500px] h-[500px] text-neutral-700 pointer-events-none z-0" />
+          {/* Radial glow behind hero name */}
+          <div
+            className="absolute top-0 left-0 w-full h-[500px] pointer-events-none z-0"
+            style={{
+              background: 'radial-gradient(circle, rgba(197, 168, 128, 0.12), transparent 70%)',
+              filter: 'blur(40px)'
+            }}
+          ></div>
+          <div className="py-10 sm:py-16 md:py-24 relative z-10 animate-fade-in max-w-3xl">
           <p className="text-[9px] sm:text-[10px] tracking-[0.3em] sm:tracking-[0.4em] text-neutral-400 uppercase font-bold flex items-center gap-2">
             <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
             Photographer
@@ -70,17 +73,17 @@ export default function Home() {
             Photographer shooting on Fujifilm X-T5, from candid weddings and portraits to street life and classical dance.
           </p>
           <SocialIcons className="pt-6" />
-        </div>
+          </div>
 
-        {/* Scroll-down indicator */}
-        <div className="hidden sm:flex justify-center pb-6 relative z-10">
-          <div className="animate-bounce text-neutral-500">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-              <path d="M12 5v14M5 12l7 7 7-7" />
-            </svg>
+          {/* Scroll-down indicator */}
+          <div className="hidden sm:flex justify-center pb-6 relative z-10">
+            <div className="animate-bounce text-neutral-500">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <path d="M12 5v14M5 12l7 7 7-7" />
+              </svg>
+            </div>
           </div>
         </div>
-
         {/* All Galleries */}
         <div className="pt-10 sm:pt-16 border-t border-neutral-200/50 relative z-10">
           <div className="mb-8 sm:mb-12">
