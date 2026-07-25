@@ -464,19 +464,19 @@ const handleEditCategoryClick = (cat) => {
     return (
       <>
         <SEO title="Studio Admin" description="Sign in to manage the studio's galleries." />
-        <div className="max-w-md mx-auto my-12 bg-white border border-neutral-200/80 p-8 sm:p-10 select-none animate-fade-in text-center space-y-6">
-          <div className="border-b border-neutral-100 pb-4">
-            <h1 className="text-sm font-semibold tracking-[0.25em] uppercase text-neutral-800">
+        <div className="max-w-md mx-auto my-12 bg-neutral-900 border border-neutral-800/80 p-8 sm:p-10 select-none animate-fade-in text-center space-y-6">
+          <div className="border-b border-neutral-800 pb-4">
+            <h1 className="text-sm font-semibold tracking-[0.25em] uppercase text-neutral-200">
               Studio Admin
             </h1>
             <p className="text-[10px] text-neutral-400 mt-2 font-light tracking-wide">
               SETUP REQUIRED
             </p>
           </div>
-          <p className="text-xs text-neutral-500 font-light leading-relaxed">
+          <p className="text-xs text-neutral-400 font-light leading-relaxed">
             Sign-in is unavailable until the backend is connected.
           </p>
-          <div className="bg-amber-50/50 border border-amber-200 text-amber-800 text-[10px] p-5 text-left font-light leading-relaxed space-y-2">
+          <div className="bg-amber-950/40 border border-amber-900 text-amber-400 text-[10px] p-5 text-left font-light leading-relaxed space-y-2">
             <strong className="font-semibold block uppercase tracking-wider">To activate Admin operations:</strong>
             <ol className="list-decimal pl-4 space-y-1.5">
               <li>Create a Firebase Project in the Google console.</li>
@@ -494,9 +494,9 @@ const handleEditCategoryClick = (cat) => {
     return (
       <>
         <SEO title="Studio Admin" description="Sign in to manage galleries." />
-        <div className="max-w-md mx-auto my-12 bg-white border border-neutral-200/80 p-8 sm:p-10 select-none animate-fade-in">
-          <div className="text-center mb-8 border-b border-neutral-100 pb-4">
-            <h1 className="text-sm font-semibold tracking-[0.25em] uppercase text-neutral-800">
+        <div className="max-w-md mx-auto my-12 bg-neutral-900 border border-neutral-800/80 p-8 sm:p-10 select-none animate-fade-in">
+          <div className="text-center mb-8 border-b border-neutral-800 pb-4">
+            <h1 className="text-sm font-semibold tracking-[0.25em] uppercase text-neutral-200">
               Studio Admin
             </h1>
             <p className="text-[10px] text-neutral-400 mt-2 font-light tracking-wide">
@@ -506,7 +506,7 @@ const handleEditCategoryClick = (cat) => {
 
           <form onSubmit={handleLogin} className="space-y-6">
             {loginError && (
-              <div className="bg-red-50/50 border border-red-200 text-red-600 text-xs px-4 py-3 font-light">
+              <div className="bg-red-950/40 border border-red-900 text-red-400 text-xs px-4 py-3 font-light">
                 {loginError}
               </div>
             )}
@@ -521,7 +521,7 @@ const handleEditCategoryClick = (cat) => {
                 required
                 value={loginEmail}
                 onChange={(e) => setLoginEmail(e.target.value)}
-                className="w-full bg-transparent border-b border-neutral-200 focus:border-accent text-sm font-light text-neutral-800 outline-none py-2.5 transition-colors duration-300"
+                className="w-full bg-transparent border-b border-neutral-800 focus:border-accent text-sm font-light text-neutral-200 outline-none py-2.5 transition-colors duration-300"
                 placeholder="admin@domain.com"
               />
             </div>
@@ -536,7 +536,7 @@ const handleEditCategoryClick = (cat) => {
                 required
                 value={loginPassword}
                 onChange={(e) => setLoginPassword(e.target.value)}
-                className="w-full bg-transparent border-b border-neutral-200 focus:border-accent text-sm font-light text-neutral-800 outline-none py-2.5 transition-colors duration-300"
+                className="w-full bg-transparent border-b border-neutral-800 focus:border-accent text-sm font-light text-neutral-200 outline-none py-2.5 transition-colors duration-300"
                 placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
               />
             </div>
@@ -561,9 +561,9 @@ const handleEditCategoryClick = (cat) => {
       
       <div className="space-y-8 animate-fade-in select-none">
         {/* Dashboard Title Header */}
-        <div className="border-b border-neutral-200 pb-6 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
+        <div className="border-b border-neutral-800 pb-6 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
           <div>
-            <h1 className="text-xl md:text-2xl font-light tracking-tight text-neutral-900">
+            <h1 className="text-xl md:text-2xl font-light tracking-tight text-neutral-100">
               Studio Admin
             </h1>
             <p className="text-[10px] text-neutral-400 mt-1 font-light tracking-widest uppercase">
@@ -572,14 +572,14 @@ const handleEditCategoryClick = (cat) => {
           </div>
           <button 
             onClick={handleLogout}
-            className="text-[10px] font-bold tracking-widest uppercase text-neutral-400 hover:text-neutral-900 border border-neutral-200 px-4 py-2 hover:bg-neutral-50 transition-colors"
+            className="text-[10px] font-bold tracking-widest uppercase text-neutral-400 hover:text-neutral-100 border border-neutral-800 px-4 py-2 hover:bg-neutral-900 transition-colors"
           >
             Log Out
           </button>
         </div>
 
         {/* Dashboard Navigation Tabs */}
-        <div className="flex border-b border-neutral-200 overflow-x-auto space-x-6 pb-px">
+        <div className="flex border-b border-neutral-800 overflow-x-auto space-x-6 pb-px">
           {[
             { id: 'categories', label: 'Categories' },
             { id: 'upload', label: 'Upload Images' },
@@ -592,7 +592,7 @@ const handleEditCategoryClick = (cat) => {
               className={`text-[10px] font-bold tracking-widest uppercase pb-3 transition-all relative border-b-2 whitespace-nowrap ${
                 activeTab === tab.id 
                   ? 'border-accent text-accent' 
-                  : 'border-transparent text-neutral-400 hover:text-neutral-900'
+                  : 'border-transparent text-neutral-400 hover:text-neutral-100'
               }`}
             >
               {tab.label}
@@ -604,13 +604,13 @@ const handleEditCategoryClick = (cat) => {
         {activeTab === 'categories' && (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             {/* Create Category Form */}
-            <div className="lg:col-span-1 bg-white border border-neutral-200/60 p-6">
-              <h3 className="text-[10px] font-bold tracking-widest uppercase text-neutral-400 mb-6 border-b border-neutral-100 pb-2">
+            <div className="lg:col-span-1 bg-neutral-900 border border-neutral-800/60 p-6">
+              <h3 className="text-[10px] font-bold tracking-widest uppercase text-neutral-400 mb-6 border-b border-neutral-800 pb-2">
                 {editingCatId ? 'Edit Category' : 'New Category'}
               </h3>
               <form onSubmit={handleCreateCategory} className="space-y-5">
                 {catError && (
-                  <div className="bg-red-50 text-red-600 text-xs px-3 py-2 font-light border border-red-200">
+                  <div className="bg-red-950/40 text-red-400 text-xs px-3 py-2 font-light border border-red-900">
                     {catError}
                   </div>
                 )}
@@ -622,7 +622,7 @@ const handleEditCategoryClick = (cat) => {
                     required
                     value={newCatName}
                     onChange={handleCatNameChange}
-                    className="w-full bg-transparent border-b border-neutral-200 focus:border-accent text-sm font-light text-neutral-800 outline-none py-1.5 transition-colors duration-300"
+                    className="w-full bg-transparent border-b border-neutral-800 focus:border-accent text-sm font-light text-neutral-200 outline-none py-1.5 transition-colors duration-300"
                     placeholder="Fine Art"
                   />
                 </div>
@@ -634,7 +634,7 @@ const handleEditCategoryClick = (cat) => {
                     required
                     value={newCatSlug}
                     onChange={(e) => setNewCatSlug(e.target.value)}
-                    className="w-full bg-transparent border-b border-neutral-200 focus:border-accent text-sm font-light text-neutral-800 outline-none py-1.5 transition-colors duration-300"
+                    className="w-full bg-transparent border-b border-neutral-800 focus:border-accent text-sm font-light text-neutral-200 outline-none py-1.5 transition-colors duration-300"
                     placeholder="fine-art"
                   />
                 </div>
@@ -645,7 +645,7 @@ const handleEditCategoryClick = (cat) => {
                     type="number"
                     value={newCatOrder}
                     onChange={(e) => setNewCatOrder(e.target.value)}
-                    className="w-full bg-transparent border-b border-neutral-200 focus:border-accent text-sm font-light text-neutral-800 outline-none py-1.5 transition-colors duration-300"
+                    className="w-full bg-transparent border-b border-neutral-800 focus:border-accent text-sm font-light text-neutral-200 outline-none py-1.5 transition-colors duration-300"
                     placeholder="Leave empty to add to end"
                   />
                 </div>
@@ -659,13 +659,13 @@ const handleEditCategoryClick = (cat) => {
                     accept="image/*"
                     required={!editingCatId}
                     onChange={(e) => setNewCatFile(e.target.files[0])}
-                    className="w-full text-xs text-neutral-500 file:mr-4 file:py-2 file:px-4 file:border file:border-neutral-200 file:text-[10px] file:font-semibold file:tracking-widest file:uppercase file:bg-neutral-50 file:text-neutral-700 hover:file:bg-neutral-100 cursor-pointer"
+                    className="w-full text-xs text-neutral-400 file:mr-4 file:py-2 file:px-4 file:border file:border-neutral-800 file:text-[10px] file:font-semibold file:tracking-widest file:uppercase file:bg-neutral-900 file:text-neutral-300 hover:file:bg-neutral-800 cursor-pointer"
                   />
                 </div>
 
                 {catUploading && (
                   <div className="space-y-1">
-                    <div className="w-full bg-neutral-100 h-1 rounded-full overflow-hidden">
+                    <div className="w-full bg-neutral-800 h-1 rounded-full overflow-hidden">
                       <div className="bg-accent h-full transition-all duration-300" style={{ width: `${catUploadProgress}%` }} />
                     </div>
                     <span className="text-[9px] text-neutral-400 tracking-wider">Uploading cover: {catUploadProgress}%</span>
@@ -684,7 +684,7 @@ const handleEditCategoryClick = (cat) => {
                     <button
                       type="button"
                       onClick={handleCancelEditCategory}
-                      className="text-[10px] font-bold tracking-widest uppercase text-neutral-500 border border-neutral-300 hover:bg-neutral-50 transition-colors duration-300 px-4 py-3"
+                      className="text-[10px] font-bold tracking-widest uppercase text-neutral-400 border border-neutral-300 hover:bg-neutral-900 transition-colors duration-300 px-4 py-3"
                     >
                       Cancel
                     </button>
@@ -695,7 +695,7 @@ const handleEditCategoryClick = (cat) => {
 
             {/* List Categories */}
             <div className="lg:col-span-2">
-              <h3 className="text-[10px] font-bold tracking-widest uppercase text-neutral-400 mb-6 border-b border-neutral-100 pb-2">
+              <h3 className="text-[10px] font-bold tracking-widest uppercase text-neutral-400 mb-6 border-b border-neutral-800 pb-2">
                 Existing Categories ({categories.length})
               </h3>
               
@@ -704,28 +704,28 @@ const handleEditCategoryClick = (cat) => {
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {categories.map((cat) => (
-                    <div key={cat.id} className="bg-white border border-neutral-200/50 p-4 flex gap-4 items-center justify-between">
+                    <div key={cat.id} className="bg-neutral-900 border border-neutral-800/50 p-4 flex gap-4 items-center justify-between">
                       <div className="flex gap-4 items-center">
                         <img 
                           src={cat.coverImageUrl} 
                           alt={cat.name} 
-                          className="w-12 h-12 object-cover bg-neutral-100 border border-neutral-200"
+                          className="w-12 h-12 object-cover bg-neutral-800 border border-neutral-800"
                         />
                         <div>
-                          <h4 className="text-xs font-semibold text-neutral-800 uppercase tracking-wider">{cat.name}</h4>
+                          <h4 className="text-xs font-semibold text-neutral-200 uppercase tracking-wider">{cat.name}</h4>
                           <p className="text-[10px] text-neutral-400 font-light mt-0.5">Slug: {cat.slug} &bull; Order: {cat.order}</p>
                         </div>
                       </div>
                       <div className="flex gap-2">
                         <button
                           onClick={() => handleEditCategoryClick(cat)}
-                          className="text-[9px] text-neutral-500 hover:text-neutral-800 tracking-widest font-semibold uppercase border border-neutral-200 hover:border-neutral-500 px-2 py-1 transition-colors"
+                          className="text-[9px] text-neutral-400 hover:text-neutral-200 tracking-widest font-semibold uppercase border border-neutral-800 hover:border-neutral-500 px-2 py-1 transition-colors"
                         >
                           Edit
                         </button>
                         <button
                           onClick={() => handleDeleteCategory(cat.id, cat.slug)}
-                          className="text-[9px] text-red-500 hover:text-red-700 tracking-widest font-semibold uppercase border border-red-200 hover:border-red-500 px-2 py-1 transition-colors"
+                          className="text-[9px] text-red-500 hover:text-red-700 tracking-widest font-semibold uppercase border border-red-900 hover:border-red-500 px-2 py-1 transition-colors"
                         >
                           Delete
                         </button>
@@ -740,8 +740,8 @@ const handleEditCategoryClick = (cat) => {
 
         {/* --- TAB CONTENT 2: UPLOAD IMAGE --- */}
         {activeTab === 'upload' && (
-          <div className="max-w-xl mx-auto bg-white border border-neutral-200/60 p-8">
-            <h3 className="text-[10px] font-bold tracking-widest uppercase text-neutral-400 mb-6 border-b border-neutral-100 pb-2">
+          <div className="max-w-xl mx-auto bg-neutral-900 border border-neutral-800/60 p-8">
+            <h3 className="text-[10px] font-bold tracking-widest uppercase text-neutral-400 mb-6 border-b border-neutral-800 pb-2">
               {editingImageId ? 'Edit Image Details' : 'Upload Image to Gallery'}
             </h3>
             
@@ -752,12 +752,12 @@ const handleEditCategoryClick = (cat) => {
             ) : (
               <form onSubmit={handleImageUpload} className="space-y-6">
                 {imageError && (
-                  <div className="bg-red-50 text-red-600 text-xs px-3 py-2 font-light border border-red-200">
+                  <div className="bg-red-950/40 text-red-400 text-xs px-3 py-2 font-light border border-red-900">
                     {imageError}
                   </div>
                 )}
                 {imageSuccess && (
-                  <div className="bg-green-50 text-green-600 text-xs px-3 py-2 font-light border border-green-200">
+                  <div className="bg-green-950/40 text-green-400 text-xs px-3 py-2 font-light border border-green-900">
                     Image successfully uploaded and added to database!
                   </div>
                 )}
@@ -768,7 +768,7 @@ const handleEditCategoryClick = (cat) => {
                     <select
                       value={uploadCategory}
                       onChange={(e) => setUploadCategory(e.target.value)}
-                      className="w-full bg-transparent border-b border-neutral-200 focus:border-accent text-xs font-light text-neutral-700 outline-none py-2 transition-colors cursor-pointer"
+                      className="w-full bg-transparent border-b border-neutral-800 focus:border-accent text-xs font-light text-neutral-300 outline-none py-2 transition-colors cursor-pointer"
                     >
                       {categories.map((c) => (
                         <option key={c.id} value={c.slug}>{c.name}</option>
@@ -783,7 +783,7 @@ const handleEditCategoryClick = (cat) => {
                       required
                       value={uploadTitle}
                       onChange={(e) => setUploadTitle(e.target.value)}
-                      className="w-full bg-transparent border-b border-neutral-200 focus:border-accent text-sm font-light text-neutral-800 outline-none py-1.5 transition-colors duration-300"
+                      className="w-full bg-transparent border-b border-neutral-800 focus:border-accent text-sm font-light text-neutral-200 outline-none py-1.5 transition-colors duration-300"
                       placeholder="e.g. Shadows in Berlin"
                     />
                   </div>
@@ -796,7 +796,7 @@ const handleEditCategoryClick = (cat) => {
                       type="text"
                       value={uploadYear}
                       onChange={(e) => setUploadYear(e.target.value)}
-                      className="w-full bg-transparent border-b border-neutral-200 focus:border-accent text-sm font-light text-neutral-800 outline-none py-1.5 transition-colors duration-300"
+                      className="w-full bg-transparent border-b border-neutral-800 focus:border-accent text-sm font-light text-neutral-200 outline-none py-1.5 transition-colors duration-300"
                       placeholder="e.g. 2025"
                     />
                   </div>
@@ -807,7 +807,7 @@ const handleEditCategoryClick = (cat) => {
                       type="text"
                       value={uploadNote}
                       onChange={(e) => setUploadNote(e.target.value)}
-                      className="w-full bg-transparent border-b border-neutral-200 focus:border-accent text-sm font-light text-neutral-800 outline-none py-1.5 transition-colors duration-300"
+                      className="w-full bg-transparent border-b border-neutral-800 focus:border-accent text-sm font-light text-neutral-200 outline-none py-1.5 transition-colors duration-300"
                       placeholder="e.g. Archival pigment print, Edition of 5"
                     />
                   </div>
@@ -820,7 +820,7 @@ const handleEditCategoryClick = (cat) => {
                       type="number"
                       value={uploadOrder}
                       onChange={(e) => setUploadOrder(e.target.value)}
-                      className="w-full bg-transparent border-b border-neutral-200 focus:border-accent text-sm font-light text-neutral-800 outline-none py-1.5 transition-colors duration-300"
+                      className="w-full bg-transparent border-b border-neutral-800 focus:border-accent text-sm font-light text-neutral-200 outline-none py-1.5 transition-colors duration-300"
                       placeholder="Leave empty to add to end"
                     />
                   </div>
@@ -830,7 +830,7 @@ const handleEditCategoryClick = (cat) => {
                     <select
                       value={uploadSize}
                       onChange={(e) => setUploadSize(e.target.value)}
-                      className="w-full bg-transparent border-b border-neutral-200 focus:border-accent text-xs font-light text-neutral-700 outline-none py-2 transition-colors cursor-pointer"
+                      className="w-full bg-transparent border-b border-neutral-800 focus:border-accent text-xs font-light text-neutral-300 outline-none py-2 transition-colors cursor-pointer"
                     >
                       <option value="1080x1080">Square (1080x1080)</option>
                       <option value="1080x1350">Portrait (1080x1350)</option>
@@ -849,13 +849,13 @@ const handleEditCategoryClick = (cat) => {
                     accept="image/*"
                     required={!editingImageId}
                     onChange={(e) => setUploadFile(e.target.files[0])}
-                    className="w-full text-xs text-neutral-500 file:mr-4 file:py-2 file:px-4 file:border file:border-neutral-200 file:text-[10px] file:font-semibold file:tracking-widest file:uppercase file:bg-neutral-50 file:text-neutral-700 hover:file:bg-neutral-100 cursor-pointer"
+                    className="w-full text-xs text-neutral-400 file:mr-4 file:py-2 file:px-4 file:border file:border-neutral-800 file:text-[10px] file:font-semibold file:tracking-widest file:uppercase file:bg-neutral-900 file:text-neutral-300 hover:file:bg-neutral-800 cursor-pointer"
                   />
                 </div>
 
                 {imageUploading && (
                   <div className="space-y-1">
-                    <div className="w-full bg-neutral-100 h-1 rounded-full overflow-hidden">
+                    <div className="w-full bg-neutral-800 h-1 rounded-full overflow-hidden">
                       <div className="bg-accent h-full transition-all duration-300" style={{ width: `${imageUploadProgress}%` }} />
                     </div>
                     <span className="text-[9px] text-neutral-400 tracking-wider">Uploading asset: {imageUploadProgress}%</span>
@@ -866,7 +866,7 @@ const handleEditCategoryClick = (cat) => {
                   <button
                     type="submit"
                     disabled={imageUploading}
-                    className="flex-1 text-center text-[10px] font-bold tracking-widest uppercase text-white bg-neutral-900 hover:bg-accent transition-colors duration-300 py-4 border border-neutral-950 disabled:bg-neutral-200 disabled:border-neutral-200"
+                    className="flex-1 text-center text-[10px] font-bold tracking-widest uppercase text-white bg-neutral-900 hover:bg-accent transition-colors duration-300 py-4 border border-neutral-950 disabled:bg-neutral-200 disabled:border-neutral-800"
                   >
                     {imageUploading ? 'Saving...' : editingImageId ? 'Update Image' : 'Upload Image'}
                   </button>
@@ -874,7 +874,7 @@ const handleEditCategoryClick = (cat) => {
                     <button
                       type="button"
                       onClick={handleCancelEditImage}
-                      className="text-[10px] font-bold tracking-widest uppercase text-neutral-500 border border-neutral-300 hover:bg-neutral-50 transition-colors duration-300 px-4 py-4"
+                      className="text-[10px] font-bold tracking-widest uppercase text-neutral-400 border border-neutral-300 hover:bg-neutral-900 transition-colors duration-300 px-4 py-4"
                     >
                       Cancel
                     </button>
@@ -888,7 +888,7 @@ const handleEditCategoryClick = (cat) => {
         {/* --- TAB CONTENT 3: MANAGE IMAGES --- */}
         {activeTab === 'manage' && (
           <div className="space-y-6">
-            <div className="border-b border-neutral-100 pb-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <div className="border-b border-neutral-800 pb-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
               <h3 className="text-[10px] font-bold tracking-widest uppercase text-neutral-400">
                 Filter Images by Gallery
               </h3>
@@ -897,7 +897,7 @@ const handleEditCategoryClick = (cat) => {
                 <select
                   value={selectedCategoryFilter}
                   onChange={(e) => setSelectedCategoryFilter(e.target.value)}
-                  className="bg-white border border-neutral-200 text-xs font-semibold uppercase tracking-wider text-neutral-700 outline-none px-4 py-2 cursor-pointer"
+                  className="bg-neutral-900 border border-neutral-800 text-xs font-semibold uppercase tracking-wider text-neutral-300 outline-none px-4 py-2 cursor-pointer"
                 >
                   {categories.map((c) => (
                     <option key={c.id} value={c.slug}>{c.name}</option>
@@ -913,22 +913,22 @@ const handleEditCategoryClick = (cat) => {
             ) : (
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
                 {filteredImages.map((img) => (
-                  <div key={img.id} className="bg-white border border-neutral-200/50 p-2.5 flex flex-col justify-between group">
+                  <div key={img.id} className="bg-neutral-900 border border-neutral-800/50 p-2.5 flex flex-col justify-between group">
                     <div>
-                      <div className="aspect-[4/5] overflow-hidden bg-neutral-50 relative">
+                      <div className="aspect-[4/5] overflow-hidden bg-neutral-900 relative">
                         <img 
                           src={img.imageUrl} 
                           alt={img.title} 
                           className="w-full h-full object-cover"
                         />
                       </div>
-                      <h4 className="text-[10px] font-semibold tracking-wider text-neutral-800 uppercase mt-2.5 truncate">{img.title}</h4>
+                      <h4 className="text-[10px] font-semibold tracking-wider text-neutral-200 uppercase mt-2.5 truncate">{img.title}</h4>
                       <p className="text-[8px] text-neutral-400 tracking-wider font-light mt-0.5">Order: {img.order} {img.year ? `• ${img.year}` : ''}</p>
                     </div>
                     <div className="flex gap-2 mt-3">
                       <button
                         onClick={() => handleEditImageClick(img)}
-                        className="flex-1 text-[9px] text-neutral-500 hover:text-neutral-800 tracking-widest font-semibold uppercase border border-neutral-200 hover:border-neutral-500 py-1.5 transition-colors"
+                        className="flex-1 text-[9px] text-neutral-400 hover:text-neutral-200 tracking-widest font-semibold uppercase border border-neutral-800 hover:border-neutral-500 py-1.5 transition-colors"
                       >
                         Edit
                       </button>
@@ -949,7 +949,7 @@ const handleEditCategoryClick = (cat) => {
         {/* --- TAB CONTENT 4: INBOX MESSAGES --- */}
         {activeTab === 'messages' && (
           <div className="space-y-6">
-            <h3 className="text-[10px] font-bold tracking-widest uppercase text-neutral-400 border-b border-neutral-100 pb-2">
+            <h3 className="text-[10px] font-bold tracking-widest uppercase text-neutral-400 border-b border-neutral-800 pb-2">
               Client Messages ({messages.length})
             </h3>
 
@@ -962,17 +962,17 @@ const handleEditCategoryClick = (cat) => {
                 {messages.map((msg) => {
                   const dateStr = msg.createdAt ? new Date(msg.createdAt.seconds * 1000).toLocaleString() : 'Just now';
                   return (
-                    <div key={msg.id} className="bg-white border border-neutral-200/50 p-6 flex flex-col md:flex-row gap-6 justify-between items-start">
+                    <div key={msg.id} className="bg-neutral-900 border border-neutral-800/50 p-6 flex flex-col md:flex-row gap-6 justify-between items-start">
                       <div className="space-y-3 flex-1">
                         <div className="flex flex-wrap gap-x-4 gap-y-1 items-baseline">
-                          <h4 className="text-xs font-bold text-neutral-800 uppercase tracking-wide">{msg.name}</h4>
+                          <h4 className="text-xs font-bold text-neutral-200 uppercase tracking-wide">{msg.name}</h4>
                           <a href={`mailto:${msg.email}`} className="text-xs text-accent hover:underline">{msg.email}</a>
                           <span className="text-[9px] text-neutral-400 font-light">{dateStr}</span>
                         </div>
                         {msg.subject && (
-                          <p className="text-xs font-semibold text-neutral-700 uppercase tracking-wider">Subject: {msg.subject}</p>
+                          <p className="text-xs font-semibold text-neutral-300 uppercase tracking-wider">Subject: {msg.subject}</p>
                         )}
-                        <p className="text-xs text-neutral-600 font-light leading-relaxed whitespace-pre-wrap">{msg.message}</p>
+                        <p className="text-xs text-neutral-300 font-light leading-relaxed whitespace-pre-wrap">{msg.message}</p>
                       </div>
                       <button
                         onClick={() => handleDeleteMessage(msg.id)}
@@ -992,7 +992,7 @@ const handleEditCategoryClick = (cat) => {
         {editingImageId && (
           <EditModal title="Edit Image Details" onClose={handleCancelEditImage}>
             {imageError && (
-              <div className="bg-red-50 text-red-600 text-xs px-3 py-2 font-light border border-red-200 mb-4">
+              <div className="bg-red-950/40 text-red-400 text-xs px-3 py-2 font-light border border-red-900 mb-4">
                 {imageError}
               </div>
             )}
@@ -1074,7 +1074,7 @@ const handleEditCategoryClick = (cat) => {
 
               <div className="space-y-2">
                 <label className="text-[9px] font-bold tracking-widest uppercase text-neutral-400 block">
-                  Image File <span className="normal-case font-light text-neutral-500">(leave empty to keep current image)</span>
+                  Image File <span className="normal-case font-light text-neutral-400">(leave empty to keep current image)</span>
                 </label>
                 <input
                   type="file"
@@ -1097,7 +1097,7 @@ const handleEditCategoryClick = (cat) => {
                 <button
                   type="submit"
                   disabled={imageUploading}
-                  className="flex-1 text-center text-[10px] font-bold tracking-widest uppercase text-white bg-neutral-100 text-neutral-950 hover:bg-accent transition-colors duration-300 py-3.5 disabled:bg-neutral-700 disabled:text-neutral-500"
+                  className="flex-1 text-center text-[10px] font-bold tracking-widest uppercase text-white bg-neutral-800 text-neutral-950 hover:bg-accent transition-colors duration-300 py-3.5 disabled:bg-neutral-700 disabled:text-neutral-400"
                 >
                   {imageUploading ? 'Saving...' : 'Update Image'}
                 </button>
