@@ -1,5 +1,12 @@
 import React from 'react';
+import Masonry from 'react-masonry-css';
 import GalleryItem from './GalleryItem';
+
+const breakpointColumnsObj = {
+  default: 4,
+  1024: 3,
+  640: 2
+};
 
 export default function GalleryGrid({ images, onImageClick }) {
   if (!images || images.length === 0) {
@@ -12,16 +19,22 @@ export default function GalleryGrid({ images, onImageClick }) {
     );
   }
 
+  const sortedImages = [...images].sort((a, b) => (a.order || 0) - (b.order || 0));
+
   return (
-    <div className="columns-2 sm:columns-2 md:columns-3 lg:columns-4 gap-3 sm:gap-6 select-none">
-          {images.map((image, index) => (
+    <Masonry
+      breakpointCols={breakpointColumnsObj}
+      className="masonry-grid select-none"
+      columnClassName="masonry-grid_column"
+    >
+      {sortedImages.map((image, index) => (
         <GalleryItem
           key={image.id || index}
           image={image}
           index={index}
           onClick={() => onImageClick && onImageClick(index)}
         />
-  ))}
-    </div>
+      ))}
+    </Masonry>
   );
 }

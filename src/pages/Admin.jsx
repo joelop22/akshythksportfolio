@@ -73,7 +73,7 @@ export default function Admin() {
   const [categories, setCategories] = useState([]);
   const [newCatName, setNewCatName] = useState('');
   const [newCatSlug, setNewCatSlug] = useState('');
-  const [newCatOrder, setNewCatOrder] = useState('0');
+  const [newCatOrder, setNewCatOrder] = useState('');
   const [newCatFile, setNewCatFile] = useState(null);
   const [catUploading, setCatUploading] = useState(false);
   const [catUploadProgress, setCatUploadProgress] = useState(0);
@@ -85,7 +85,7 @@ export default function Admin() {
   const [uploadTitle, setUploadTitle] = useState('');
   const [uploadYear, setUploadYear] = useState('');
   const [uploadNote, setUploadNote] = useState('');
-  const [uploadOrder, setUploadOrder] = useState('0');
+  const [uploadOrder, setUploadOrder] = useState('');
   const [uploadSize, setUploadSize] = useState('1080x1350');
   const [uploadFile, setUploadFile] = useState(null);
   const [imageUploading, setImageUploading] = useState(false);
@@ -242,13 +242,26 @@ export default function Admin() {
       if (newCatFile) {
         coverImageUrl = await fileToCompressedBase64(newCatFile);
       }
-      setCatUploadProgress(70);
+     setCatUploadProgress(70);
+
+      let finalCatOrder;
+      if (newCatOrder === '' || newCatOrder === null) {
+        const existingSnapshot = await getDocs(collection(db, 'categories'));
+        let maxOrder = -1;
+        existingSnapshot.forEach((docSnap) => {
+          const o = docSnap.data().order || 0;
+          if (o > maxOrder) maxOrder = o;
+        });
+        finalCatOrder = maxOrder + 1;
+      } else {
+        finalCatOrder = parseInt(newCatOrder, 10) || 0;
+      }
 
       if (isEditing) {
         const updateData = {
           name: newCatName,
           slug: newCatSlug,
-          order: parseInt(newCatOrder, 10) || 0
+          order: finalCatOrder
         };
         if (coverImageUrl) {
           updateData.coverImageUrl = coverImageUrl;
@@ -258,7 +271,7 @@ export default function Admin() {
         await addDoc(collection(db, 'categories'), {
           name: newCatName,
           slug: newCatSlug,
-          order: parseInt(newCatOrder, 10) || 0,
+          order: finalCatOrder,
           coverImageUrl: coverImageUrl
         });
       }
@@ -266,7 +279,7 @@ export default function Admin() {
 
       setNewCatName('');
       setNewCatSlug('');
-      setNewCatOrder('0');
+      setNewCatOrder('');
       setNewCatFile(null);
       setEditingCatId(null);
       setCatUploadProgress(0);
@@ -293,7 +306,7 @@ const handleEditCategoryClick = (cat) => {
     setEditingCatId(null);
     setNewCatName('');
     setNewCatSlug('');
-    setNewCatOrder('0');
+    setNewCatOrder('');
     setNewCatFile(null);
     setCatError('');
   };
@@ -332,13 +345,30 @@ const handleEditCategoryClick = (cat) => {
       }
       setImageUploadProgress(70);
 
-      if (isEditing) {
+      let finalOrder;
+      if (uploadOrder === '' || uploadOrder === null) {
+        const existingQuery = query(
+          collection(db, 'images'),
+          where('categorySlug', '==', uploadCategory)
+        );
+        const existingSnapshot = await getDocs(existingQuery);
+        let maxOrder = -1;
+        existingSnapshot.forEach((docSnap) => {
+          const o = docSnap.data().order || 0;
+          if (o > maxOrder) maxOrder = o;
+        });
+        finalOrder = maxOrder + 1;
+      } else {
+        finalOrder = parseInt(uploadOrder, 10) || 0;
+      }
+
+     if (isEditing) {
         const updateData = {
           categorySlug: uploadCategory,
           title: uploadTitle,
           year: uploadYear,
           note: uploadNote,
-          order: parseInt(uploadOrder, 10) || 0,
+          order: finalOrder,
           size: uploadSize
         };
         if (base64Image) {
@@ -352,7 +382,7 @@ const handleEditCategoryClick = (cat) => {
           title: uploadTitle,
           year: uploadYear,
           note: uploadNote,
-          order: parseInt(uploadOrder, 10) || 0,
+          order: finalOrder,
           size: uploadSize
         });
       }
@@ -361,7 +391,7 @@ const handleEditCategoryClick = (cat) => {
       setUploadTitle('');
       setUploadYear('');
       setUploadNote('');
-      setUploadOrder('0');
+      setUploadOrder('');
       setUploadSize('1080x1350');
       setUploadFile(null);
       setEditingImageId(null);
@@ -395,7 +425,7 @@ const handleEditCategoryClick = (cat) => {
     setUploadTitle('');
     setUploadYear('');
     setUploadNote('');
-    setUploadOrder('0');
+    setUploadOrder('');
     setUploadSize('1080x1350');
     setUploadFile(null);
     setImageError('');
@@ -616,7 +646,7 @@ const handleEditCategoryClick = (cat) => {
                     value={newCatOrder}
                     onChange={(e) => setNewCatOrder(e.target.value)}
                     className="w-full bg-transparent border-b border-neutral-200 focus:border-accent text-sm font-light text-neutral-800 outline-none py-1.5 transition-colors duration-300"
-                    placeholder="0"
+                    placeholder="Leave empty to add to end"
                   />
                 </div>
 
@@ -791,7 +821,7 @@ const handleEditCategoryClick = (cat) => {
                       value={uploadOrder}
                       onChange={(e) => setUploadOrder(e.target.value)}
                       className="w-full bg-transparent border-b border-neutral-200 focus:border-accent text-sm font-light text-neutral-800 outline-none py-1.5 transition-colors duration-300"
-                      placeholder="0"
+                      placeholder="Leave empty to add to end"
                     />
                   </div>
 

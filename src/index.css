@@ -86,3 +86,26 @@
   -ms-user-select: none;
   pointer-events: none;
 }
+.masonry-grid {
+  display: flex;
+  margin-left: -0.75rem;
+  width: auto;
+}
+.masonry-grid_column {
+  padding-left: 0.75rem;
+  background-clip: padding-box;
+}
+.masonry-grid_column > div {
+  margin-bottom: 0.75rem;
+}
+@media (min-width: 640px) {
+  .masonry-grid {
+    margin-left: -1.5rem;
+  }
+  .masonry-grid_column {
+    padding-left: 1.5rem;
+  }
+  .masonry-grid_column > div {
+    margin-bottom: 1.5rem;
+  }
+}
