@@ -1,7 +1,24 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-
 export default function Nav() {
+  const [visible, setVisible] = useState(true);
+  const lastScrollY = useRef(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      if (currentScrollY < 50) {
+        setVisible(true);
+      } else if (currentScrollY > lastScrollY.current) {
+        setVisible(false);
+      } else {
+        setVisible(true);
+      }
+      lastScrollY.current = currentScrollY;
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
   const links = [
     { name: 'Home', path: '/' },
     { name: 'Work', path: '/work' },
@@ -10,7 +27,7 @@ export default function Nav() {
   ];
 
   return (
-    <nav className="bg-offwhite/80 backdrop-blur-md sticky top-0 z-40 select-none border-b border-neutral-800/50">
+    <nav className={`bg-offwhite/95 backdrop-blur-xl sticky top-0 z-40 select-none border-b border-neutral-800/50 transition-transform duration-500 ease-brand ${visible ? 'translate-y-0' : '-translate-y-full'}`}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex justify-between items-center gap-3">
         {/* Brand Logo */}
         <Link
