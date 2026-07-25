@@ -20,6 +20,7 @@ import {
 import { auth, db } from '../lib/firebase';
 import SEO from '../components/SEO';
 import LoadingSpinner from '../components/LoadingSpinner';
+import EditModal from '../components/EditModal';
 // Converts an image file to a compressed base64 data URL, resizing it so the
 // resulting string comfortably fits inside Firestore's 1MB document limit.
 // No Firebase Storage is used -- the image itself is stored directly in Firestore.
@@ -417,7 +418,6 @@ const handleEditCategoryClick = (cat) => {
     setUploadSize(img.size || '1080x1350');
     setUploadFile(null);
     setImageError('');
-    setActiveTab('upload');
   };
 
   const handleCancelEditImage = () => {
@@ -986,6 +986,131 @@ const handleEditCategoryClick = (cat) => {
               </div>
             )}
           </div>
+        )}
+
+        {/* Edit Image Modal */}
+        {editingImageId && (
+          <EditModal title="Edit Image Details" onClose={handleCancelEditImage}>
+            {imageError && (
+              <div className="bg-red-50 text-red-600 text-xs px-3 py-2 font-light border border-red-200 mb-4">
+                {imageError}
+              </div>
+            )}
+            <form onSubmit={handleImageUpload} className="space-y-6">
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-1 col-span-2 sm:col-span-1">
+                  <label className="text-[9px] font-bold tracking-widest uppercase text-neutral-400">Target Gallery</label>
+                  <select
+                    value={uploadCategory}
+                    onChange={(e) => setUploadCategory(e.target.value)}
+                    className="w-full bg-transparent border-b border-neutral-800 focus:border-accent text-xs font-light text-neutral-200 outline-none py-2 transition-colors cursor-pointer"
+                  >
+                    {categories.map((c) => (
+                      <option key={c.id} value={c.slug}>{c.name}</option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="space-y-1 col-span-2 sm:col-span-1">
+                  <label className="text-[9px] font-bold tracking-widest uppercase text-neutral-400">Title</label>
+                  <input
+                    type="text"
+                    required
+                    value={uploadTitle}
+                    onChange={(e) => setUploadTitle(e.target.value)}
+                    className="w-full bg-transparent border-b border-neutral-800 focus:border-accent text-sm font-light text-neutral-200 outline-none py-1.5 transition-colors duration-300"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-3 gap-4">
+                <div className="space-y-1">
+                  <label className="text-[9px] font-bold tracking-widest uppercase text-neutral-400">Year</label>
+                  <input
+                    type="text"
+                    value={uploadYear}
+                    onChange={(e) => setUploadYear(e.target.value)}
+                    className="w-full bg-transparent border-b border-neutral-800 focus:border-accent text-sm font-light text-neutral-200 outline-none py-1.5 transition-colors duration-300"
+                  />
+                </div>
+
+                <div className="space-y-1 col-span-2">
+                  <label className="text-[9px] font-bold tracking-widest uppercase text-neutral-400">Note</label>
+                  <input
+                    type="text"
+                    value={uploadNote}
+                    onChange={(e) => setUploadNote(e.target.value)}
+                    className="w-full bg-transparent border-b border-neutral-800 focus:border-accent text-sm font-light text-neutral-200 outline-none py-1.5 transition-colors duration-300"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-1">
+                  <label className="text-[9px] font-bold tracking-widest uppercase text-neutral-400">Sorting Order</label>
+                  <input
+                    type="number"
+                    value={uploadOrder}
+                    onChange={(e) => setUploadOrder(e.target.value)}
+                    className="w-full bg-transparent border-b border-neutral-800 focus:border-accent text-sm font-light text-neutral-200 outline-none py-1.5 transition-colors duration-300"
+                    placeholder="Leave empty to add to end"
+                  />
+                </div>
+
+                <div className="space-y-1">
+                  <label className="text-[9px] font-bold tracking-widest uppercase text-neutral-400">Display Size</label>
+                  <select
+                    value={uploadSize}
+                    onChange={(e) => setUploadSize(e.target.value)}
+                    className="w-full bg-transparent border-b border-neutral-800 focus:border-accent text-xs font-light text-neutral-200 outline-none py-2 transition-colors cursor-pointer"
+                  >
+                    <option value="1080x1080">Square (1080x1080)</option>
+                    <option value="1080x1350">Portrait (1080x1350)</option>
+                    <option value="1920x1080">Landscape (1920x1080)</option>
+                    <option value="1080x1920">Story (1080x1920)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-[9px] font-bold tracking-widest uppercase text-neutral-400 block">
+                  Image File <span className="normal-case font-light text-neutral-500">(leave empty to keep current image)</span>
+                </label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => setUploadFile(e.target.files[0])}
+                  className="w-full text-xs text-neutral-400 file:mr-4 file:py-2 file:px-4 file:border file:border-neutral-700 file:text-[10px] file:font-semibold file:tracking-widest file:uppercase file:bg-neutral-800 file:text-neutral-200 hover:file:bg-neutral-700 cursor-pointer"
+                />
+              </div>
+
+              {imageUploading && (
+                <div className="space-y-1">
+                  <div className="w-full bg-neutral-800 h-1 rounded-full overflow-hidden">
+                    <div className="bg-accent h-full transition-all duration-300" style={{ width: `${imageUploadProgress}%` }} />
+                  </div>
+                  <span className="text-[9px] text-neutral-400 tracking-wider">Saving: {imageUploadProgress}%</span>
+                </div>
+              )}
+
+              <div className="flex gap-2">
+                <button
+                  type="submit"
+                  disabled={imageUploading}
+                  className="flex-1 text-center text-[10px] font-bold tracking-widest uppercase text-white bg-neutral-100 text-neutral-950 hover:bg-accent transition-colors duration-300 py-3.5 disabled:bg-neutral-700 disabled:text-neutral-500"
+                >
+                  {imageUploading ? 'Saving...' : 'Update Image'}
+                </button>
+                <button
+                  type="button"
+                  onClick={handleCancelEditImage}
+                  className="text-[10px] font-bold tracking-widest uppercase text-neutral-400 border border-neutral-700 hover:bg-neutral-800 transition-colors duration-300 px-4 py-3.5"
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </EditModal>
         )}
       </div>
     </>
