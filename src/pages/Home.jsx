@@ -72,6 +72,15 @@ export default function Home() {
           <SocialIcons className="pt-6" />
         </div>
 
+        {/* Scroll-down indicator */}
+        <div className="hidden sm:flex justify-center pb-6 relative z-10">
+          <div className="animate-bounce text-neutral-500">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <path d="M12 5v14M5 12l7 7 7-7" />
+            </svg>
+          </div>
+        </div>
+
         {/* All Galleries */}
         <div className="pt-10 sm:pt-16 border-t border-neutral-200/50 relative z-10">
           <div className="mb-8 sm:mb-12">
